@@ -1,71 +1,75 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-enum{
-    
+enum SidewaysDirections
+{
+    up,
+    down,
+    left,
+    right
 }
 
 public class RobotMovement : MonoBehaviour
 {
+    private GameObject RobotModel;
+    private Rigidbody RobotObject;
+    bool onWall;
+    //NOTE: for testing only
     [SerializeField]
-    Rigidbody robot;
-    private Transform currentSide;
+    int sidewaysSpeedMultiplier = 10;
     void Start()
     {
-        robot = this.gameObject.GetComponent<Rigidbody>();
+        RobotModel = gameObject.transform.GetChild(0).gameObject;
+        RobotObject = gameObject.transform.GetComponent<Rigidbody>();
     }
 
     void Update()
     {
         MoveForward();
+
+        // NOTE: for testing purposes only
         if (Input.GetKey(KeyCode.A))
         {
-            LeftRightDownUp(true);
+            LeftRightDownUp(SidewaysDirections.left);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            LeftRightDownUp(false);
+            LeftRightDownUp(SidewaysDirections.right);
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            LeftRightDownUp(SidewaysDirections.up);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            LeftRightDownUp(SidewaysDirections.down);
         }
     }
 
     private void MoveForward()
     {
-        robot.velocity = transform.forward * 0.0001f;
+        RobotObject.velocity = transform.forward * 0.0001f;
     }
 
     private void OnCollisionEnter(Collision col)
     {
-        Debug.Log(col.transform.gameObject);
-        if (col.gameObject.tag == "vertical" && col.gameObject.transform != currentSide)
-        {
-            robot.transform.Rotate(0f, 180f, 0f);
-        }
-        else if (col.gameObject.tag == "floor" && col.gameObject.transform != currentSide)
-        {
-            robot.transform.Rotate(0f, 0f, 0f);
-        }
-        else if (col.transform.transform.tag == "leftwall" && col.gameObject.transform != currentSide)
-        {
-            robot.transform.Rotate(0f, 0f, -90f);
-
-        }
-        else if (col.transform.transform.tag == "rightwall" && col.gameObject.transform != currentSide)
-        {
-            robot.transform.Rotate(0f, 0f, 90f);
-        }
-        currentSide = col.gameObject.transform;
+        onWall = col.gameObject.tag == "vertical" ? true : false;
+        RobotModel.transform.eulerAngles = col.gameObject.tag == "vertical"
+            ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);
     }
 
-    private void LeftRightDownUp(bool isLeft)
+    private void LeftRightDownUp(SidewaysDirections direction)
     {
-        if (!isLeft)
+        if (direction == SidewaysDirections.up || direction == SidewaysDirections.down)
         {
-            robot.velocity = transform.right * 8;
+            if (onWall)
+                RobotObject.velocity = (direction == SidewaysDirections.up
+                    ? Vector3.up : Vector3.down) * sidewaysSpeedMultiplier;
         }
-        else
+        else if (direction == SidewaysDirections.left || direction == SidewaysDirections.right)
         {
-            robot.velocity = transform.right * -8;
+            if (!onWall)
+                RobotObject.velocity = (direction == SidewaysDirections.left
+                    ? Vector3.left : Vector3.right) * sidewaysSpeedMultiplier;
         }
     }
 }
