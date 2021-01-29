@@ -16,6 +16,9 @@ public class RobotMovement : MonoBehaviour
     //NOTE: for testing only
     [SerializeField]
     int sidewaysSpeedMultiplier = 10;
+    //NOTE: for testing only
+    [SerializeField]
+    int forwardSpeedMultiplier = 2;
     void Start()
     {
         RobotModel = gameObject.transform.GetChild(0).gameObject;
@@ -47,7 +50,7 @@ public class RobotMovement : MonoBehaviour
 
     private void MoveForward()
     {
-        RobotObject.velocity = transform.forward * 0.0001f;
+        RobotObject.velocity = transform.forward * forwardSpeedMultiplier;
     }
 
     private void OnCollisionEnter(Collision col)
