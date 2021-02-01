@@ -12,39 +12,39 @@ public class RobotMovement : MonoBehaviour
 {
     private GameObject RobotModel;
     private Rigidbody RobotObject;
-    bool onWall;
+    private bool onWall;
     //NOTE: for testing only
     [SerializeField]
-    int sidewaysSpeedMultiplier = 10;
+    private int sidewaysSpeedMultiplier = 10;
     //NOTE: for testing only
     [SerializeField]
-    int forwardSpeedMultiplier = 2;
-    void Start()
+    private int forwardSpeedMultiplier = 2;
+    private void Start()
     {
         RobotModel = gameObject.transform.GetChild(0).gameObject;
         RobotObject = gameObject.transform.GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
         MoveForward();
 
         // NOTE: for testing purposes only
         if (Input.GetKey(KeyCode.A))
         {
-            LeftRightDownUp(SidewaysDirections.left);
+            MoveSideways(SidewaysDirections.left);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            LeftRightDownUp(SidewaysDirections.right);
+            MoveSideways(SidewaysDirections.right);
         }
         if (Input.GetKey(KeyCode.W))
         {
-            LeftRightDownUp(SidewaysDirections.up);
+            MoveSideways(SidewaysDirections.up);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            LeftRightDownUp(SidewaysDirections.down);
+            MoveSideways(SidewaysDirections.down);
         }
     }
 
@@ -60,7 +60,7 @@ public class RobotMovement : MonoBehaviour
             ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);
     }
 
-    private void LeftRightDownUp(SidewaysDirections direction)
+    private void MoveSideways(SidewaysDirections direction)
     {
         if (direction == SidewaysDirections.up || direction == SidewaysDirections.down)
         {
