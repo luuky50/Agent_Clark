@@ -71,7 +71,7 @@ public class RobotMovement : MonoBehaviour
         else if (direction == SidewaysDirections.left || direction == SidewaysDirections.right)
         {
             if (!onWall)
-                RobotObject.velocity = (direction == SidewaysDirections.left
+                RobotObject.velocity = (direction == SidewaysDirections.right
                     ? Vector3.left : Vector3.right) * sidewaysSpeedMultiplier;
         }
     }
