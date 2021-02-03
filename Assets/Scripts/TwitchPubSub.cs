@@ -43,7 +43,7 @@ public class TwitchPubSub : MonoBehaviour
 
     private void _pubSub_OnPubSubServiceError(object sender, TwitchLib.PubSub.Events.OnPubSubServiceErrorArgs e)
     {
-		Debug.Log($"PubSub has thrown a unexpected error: {e}");
+		Debug.LogError($"PubSub has thrown a unexpected error: {e.Exception.Message}");
     }
 
 

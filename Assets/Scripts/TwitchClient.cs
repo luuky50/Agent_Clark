@@ -10,6 +10,8 @@ public class TwitchClient : MonoBehaviour
 	[SerializeField] //[SerializeField] Allows the private field to show up in Unity's inspector. Way better than just making it public
 	private string _channelToConnectTo = Secrets.USERNAME_FROM_OAUTH_TOKEN;
 
+	public RobotMovement robotMovement;
+
 	private Client _client;
 
 	private void Start()
@@ -18,6 +20,7 @@ public class TwitchClient : MonoBehaviour
 		// Unity Editor --> Edit --> Project Settings --> Player --> Resolution and Presentation --> Resolution --> Run In Background
 		// This option seems to be enabled by default in more recent versions of Unity. An aditional, less recommended option is to set it in code:
 		// Application.runInBackground = true;
+		robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
 
 		//Create Credentials instance
 		ConnectionCredentials credentials = new ConnectionCredentials(Secrets.USERNAME_FROM_OAUTH_TOKEN, Secrets.OAUTH_TOKEN);
@@ -51,7 +54,7 @@ public class TwitchClient : MonoBehaviour
 
     private void _client_OnError(object sender, TwitchLib.Communication.Events.OnErrorEventArgs e)
     {
-		Debug.Log($"The program didnt work correctly: {e}");
+		Debug.LogError($"The program didnt work correctly: {e.Exception.Message}");
     }
 
     private void OnConnected(object sender, TwitchLib.Client.Events.OnConnectedArgs e)
@@ -82,12 +85,22 @@ public class TwitchClient : MonoBehaviour
 	{
 		switch (e.Command.CommandText)
 		{
-			case "hello":
-				_client.SendWhisper(e.Command.ChatMessage.Username, "Its working!");
-				_client.SendMessage(e.Command.ChatMessage.Channel, $"Hello {e.Command.ChatMessage.DisplayName}!");
+			case "d":
+				//_client.SendWhisper(e.Command.ChatMessage.Username, "Its working!");
+				_client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot to the right");
+				robotMovement.MoveSideways(SidewaysDirections.right);
 				break;
-			case "about":
-				_client.SendMessage(e.Command.ChatMessage.Channel, "I am a Twitch bot running on TwitchLib!");
+			case "a":
+				_client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot to the left");
+				robotMovement.MoveSideways(SidewaysDirections.left);
+				break;
+			case "w":
+				_client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot up");
+				robotMovement.MoveSideways(SidewaysDirections.up);
+				break;
+			case "s":
+				_client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot down");
+				robotMovement.MoveSideways(SidewaysDirections.down);
 				break;
 			default:
 				_client.SendMessage(e.Command.ChatMessage.Channel, $"Unknown chat command: {e.Command.CommandIdentifier}{e.Command.CommandText}");
