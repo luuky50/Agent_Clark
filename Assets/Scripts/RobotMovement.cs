@@ -15,10 +15,10 @@ public class RobotMovement : MonoBehaviour
     private bool onWall;
     //NOTE: for testing only
     [SerializeField]
-    private int sidewaysSpeedMultiplier = 10;
+    private int sidewaysSpeedMultiplier;
     //NOTE: for testing only
     [SerializeField]
-    private int forwardSpeedMultiplier = 2;
+    private float forwardSpeedMultiplier;
     private void Start()
     {
         RobotModel = gameObject.transform.GetChild(0).gameObject;
@@ -30,11 +30,11 @@ public class RobotMovement : MonoBehaviour
         MoveForward();
 
         // NOTE: for testing purposes only
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             MoveSideways(SidewaysDirections.left);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             MoveSideways(SidewaysDirections.right);
         }
@@ -50,7 +50,7 @@ public class RobotMovement : MonoBehaviour
 
     private void MoveForward()
     {
-        RobotObject.velocity = transform.forward * forwardSpeedMultiplier;
+        RobotObject.transform.position = new Vector3(RobotObject.transform.position.x, RobotObject.transform.position.y, RobotObject.transform.position.z + forwardSpeedMultiplier);
     }
 
     private void OnCollisionEnter(Collision col)
