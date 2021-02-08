@@ -9,5 +9,3 @@ public static class Secrets
 	public const string USERNAME_FROM_OAUTH_TOKEN = "robotcommander"; //The username which was used to generate the OAuth token
 	public const string CHANNEL_ID_FROM_OAUTH_TOKEN = "642538431"; //The channel Id from the account which was used to generate the OAuth token
 }
-
-//642538431

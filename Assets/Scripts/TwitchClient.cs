@@ -86,7 +86,6 @@ public class TwitchClient : MonoBehaviour
 		switch (e.Command.CommandText)
 		{
 			case "d":
-				//_client.SendWhisper(e.Command.ChatMessage.Username, "Its working!");
 				_client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot to the right");
 				robotMovement.MoveSideways(SidewaysDirections.right);
 				break;
@@ -109,7 +108,7 @@ public class TwitchClient : MonoBehaviour
 	}
 
 
-
+	//TODO: This will be removed in final version
     private void Update()
 	{
 		// Don't call the client send message on every Update,
@@ -117,7 +116,6 @@ public class TwitchClient : MonoBehaviour
 		// not an example on how to code.
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			_client.SendWhisper(_channelToConnectTo, "Your mom");
 			_client.SendMessage(_channelToConnectTo, "I pressed the space key within Unity.");
 		}
 	}

@@ -1,5 +1,7 @@
 using UnityEngine;
 
+
+//Directional constants for MoveSideways
 public enum SidewaysDirections
 {
     up,
@@ -60,6 +62,7 @@ public class RobotMovement : MonoBehaviour
             ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);
     }
 
+    //This allows the robot to move the directions it needs to go
     public void MoveSideways(SidewaysDirections direction)
     {
         if (direction == SidewaysDirections.up || direction == SidewaysDirections.down)
