@@ -6,6 +6,8 @@ public class RobotHealth : MonoBehaviour
 {
     private float health;
     private float damage;
+    
+    // information about current health and damage it can deal to others
     public RobotHealth(float newHealth, float newDamage)
     {
         health = newHealth;
