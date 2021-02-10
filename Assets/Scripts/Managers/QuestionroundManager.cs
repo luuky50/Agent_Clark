@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class QuestionroundManager : SingletonComponent<QuestionroundManager>
 {
-    Dictionary<string, string> Questions = new Dictionary<string, string>()
+    [SerializeField]
+    private Dictionary<string, string> Questions = new Dictionary<string, string>()
     {
         {"What year is it?\n" +
             "Example: !answer 2014", "2021"}
     };
 
-    GameObject QuestionRoundPanel;
+    private GameObject QuestionRoundPanel;
     
-    KeyValuePair<string, string> currentQuestion;
-    void Start()
+    private KeyValuePair<string, string> currentQuestion;
+    private void Start()
     {
         InitializeQuestionRoundUI();
     }
@@ -26,18 +27,26 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
 
     private void Update()
     {
+        // TODO: Implement logic for when rounds should begin
         if (Input.GetKeyDown(KeyCode.Space))
         {
             BeginQuestionRound();
         }
     }
 
+    /// <summary>
+    /// Handles initiation of a questionround. 
+    /// </summary>
     public void BeginQuestionRound()
     {
         currentQuestion = Questions.ElementAt(Random.Range(0, Questions.Count - 1));
         QuestionRoundPanel.GetComponentInChildren<Text>().text = currentQuestion.Key;
     }
 
+    /// <summary>
+    /// Validates if the given answer is correct
+    /// </summary>
+    /// <param name="Answer"></param>
     public void ValidateQuestion(string Answer)
     {
         if (currentQuestion.Value == Answer)
@@ -46,7 +55,6 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         }
         else
         {
-            Debug.Log(currentQuestion.Value);
             Debug.Log("Question Answerd Wrong!");
         }
     }

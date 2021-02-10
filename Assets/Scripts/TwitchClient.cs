@@ -84,7 +84,6 @@ public class TwitchClient : MonoBehaviour
                 QuestionroundManager.instance.ValidateQuestion(e.ChatMessage.Message.Substring(8));
             }
         }
-        //  Debug.Log($"Message received from {e.ChatMessage.UserId}: {e.ChatMessage.Message}");
     }
 
 
@@ -109,7 +108,6 @@ public class TwitchClient : MonoBehaviour
                 robotMovement.MoveSideways(SidewaysDirections.down);
                 break;
             default:
-
                 break;
         }
     }
