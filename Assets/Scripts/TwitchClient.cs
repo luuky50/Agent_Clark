@@ -79,7 +79,7 @@ public class TwitchClient : MonoBehaviour
     {
         if (e.ChatMessage.Message.Contains("!"))
         {
-            if (e.ChatMessage.Message.Contains("!answer"))
+            if (e.ChatMessage.Message.Contains("answer"))
             {
                 QuestionroundManager.instance.ValidateQuestion(e.ChatMessage.Message.Substring(8));
             }
