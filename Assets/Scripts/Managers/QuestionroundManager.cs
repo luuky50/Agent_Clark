@@ -17,6 +17,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     private KeyValuePair<string, string> currentQuestion;
     private void Start()
     {
+        // TODO: initialize this only when we are in a scene where this is relevant
         InitializeQuestionRoundUI();
     }
 
