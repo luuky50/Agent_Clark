@@ -10,6 +10,7 @@ TagManager:
   - rightwall
   - vertical
   - horizontal
+  - Robot
   layers:
   - Default
   - TransparentFX
