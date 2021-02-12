@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TwitchPubSub : MonoBehaviour
 {
-	private PubSub _pubSub;
+/*	private PubSub _pubSub;
 
 	private void Start()
 	{
@@ -65,5 +65,5 @@ private void OnWhisper(object sender, TwitchLib.PubSub.Events.OnWhisperArgs e)
 		Debug.Log("ITS GETTING A WHISPER");
 		Debug.Log($"{e.Whisper.Data}");
 		// Do your bits logic here.
-	}
+	}*/
 }

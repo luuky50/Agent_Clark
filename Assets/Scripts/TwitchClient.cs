@@ -1,6 +1,7 @@
 ﻿// If type or namespace TwitchLib could not be found. Make sure you add the latest TwitchLib.Unity.dll to your project folder
 // Download it here: https://github.com/TwitchLib/TwitchLib.Unity/releases
 // Or download the repository at https://github.com/TwitchLib/TwitchLib.Unity, build it, and copy the TwitchLib.Unity.dll from the output directory
+using System;
 using TwitchLib.Client.Models;
 using TwitchLib.Unity;
 using UnityEngine;
@@ -83,6 +84,18 @@ public class TwitchClient : MonoBehaviour
             {
                 QuestionroundManager.instance.ValidateQuestion(e.ChatMessage.Message.Substring(8));
             }
+            else if (e.ChatMessage.Message.Contains("join"))
+            {
+                try
+                {
+                    LevelManager.instance.addParticipant(new Participant(e.ChatMessage.UserId), (int.Parse(e.ChatMessage.Message.Substring(6)) - 1));
+                }
+                catch (Exception ex)
+                {
+                    // TODO: Whisper about why it could not join team to person who send this message
+                    Debug.LogError("Could not join team!   " + ex);
+                }
+            }
         }
     }
 
@@ -109,19 +122,6 @@ public class TwitchClient : MonoBehaviour
                 break;
             default:
                 break;
-        }
-    }
-
-
-    //TODO: This will be removed in final version
-    private void Update()
-    {
-        // Don't call the client send message on every Update,
-        // this is sample on how to call the client,
-        // not an example on how to code.
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _client.SendMessage(_channelToConnectTo, "I pressed the space key within Unity.");
         }
     }
 }
