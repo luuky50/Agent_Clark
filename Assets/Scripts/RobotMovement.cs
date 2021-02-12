@@ -32,19 +32,19 @@ public class RobotMovement : MonoBehaviour
         MoveForward();
 
         // NOTE: for testing purposes only
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             MoveSideways(SidewaysDirections.left);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             MoveSideways(SidewaysDirections.right);
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             MoveSideways(SidewaysDirections.up);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             MoveSideways(SidewaysDirections.down);
         }

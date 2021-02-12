@@ -11,6 +11,7 @@ TagManager:
   - vertical
   - horizontal
   - Robot
+  - DontDestroy
   layers:
   - Default
   - TransparentFX
