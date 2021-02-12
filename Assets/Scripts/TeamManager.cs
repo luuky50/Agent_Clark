@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : SingletonComponent<LevelManager>
+public class TeamManager : SingletonComponent<TeamManager>
 {
     private Dictionary<int, List<Participant>> teams = new Dictionary<int, List<Participant>>();
     void Start()

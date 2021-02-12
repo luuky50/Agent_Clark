@@ -88,7 +88,8 @@ public class TwitchClient : MonoBehaviour
             {
                 try
                 {
-                    LevelManager.instance.addParticipant(new Participant(e.ChatMessage.UserId), (int.Parse(e.ChatMessage.Message.Substring(6)) - 1));
+                    // TODO: Add index out of range check, for example when someone says "!join 9000000"
+                    TeamManager.instance.addParticipant(new Participant(e.ChatMessage.UserId), (int.Parse(e.ChatMessage.Message.Substring(6)) - 1));
                 }
                 catch (Exception ex)
                 {
