@@ -30,10 +30,6 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     [SerializeField] Text[] teamOneStatusText;
 
 
-
-    /// <summary>
-    /// 
-    /// </summary>
     private Dictionary<int, Dictionary<int, bool>> PlayerAnswersOfMultipleChoice = new Dictionary<int, Dictionary<int, bool>>();
 
     private GameObject QuestionRoundPanel;
