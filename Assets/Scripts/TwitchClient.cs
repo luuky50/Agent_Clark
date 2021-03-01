@@ -82,14 +82,15 @@ public class TwitchClient : MonoBehaviour
         {
             if (e.ChatMessage.Message.Contains("answer"))
             {
-                QuestionroundManager.instance.ValidateQuestion(e.ChatMessage.Message.Substring(8));
+                QuestionroundManager.instance.ValidateClosedQuestion(e.ChatMessage.Message.Substring(8), int.Parse(e.ChatMessage.UserId));
             }
             else if (e.ChatMessage.Message.Contains("join"))
             {
                 try
                 {
+                    Debug.Log(e.ChatMessage.UserId);
                     // TODO: Add index out of range check, for example when someone says "!join 9000000"
-                    TeamManager.instance.addParticipant(new Participant(e.ChatMessage.UserId), (int.Parse(e.ChatMessage.Message.Substring(6)) - 1));
+                    TeamManager.instance.addParticipant(new Participant(int.Parse(e.ChatMessage.UserId), int.Parse(e.ChatMessage.Message.Substring(6)) -1));
                 }
                 catch (Exception ex)
                 {
