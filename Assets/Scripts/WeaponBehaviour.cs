@@ -13,11 +13,19 @@ public class WeaponBehaviour : MonoBehaviour
     public GameObject barrel;
     public float testSpeed = 4;
     private GameObject throwable;
+    private GameObject spawnPoint;
     private Throwable throwableGun;
     
 
     private void Start()
     {
+        
+        if (gameObject.transform.GetChild(2).name == "BulletSpawn")
+            spawnPoint = gameObject.transform.GetChild(2).gameObject;
+        else
+            Debug.LogError("CANNOT FIND A SPAWNPOINT");
+
+
         throwable = gameObject;
         throwableGun = throwable.GetComponent<Throwable>();
     }
@@ -34,7 +42,7 @@ public class WeaponBehaviour : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        GameObject newBullet = Instantiate(bullet, barrel.transform.position, transform.rotation);
+        GameObject newBullet = Instantiate(bullet, spawnPoint.transform.position, transform.rotation);
         Rigidbody bulletRigid = newBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = transform.forward * testSpeed;
 

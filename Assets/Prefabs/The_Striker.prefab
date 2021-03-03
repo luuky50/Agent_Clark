@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1659671178222636469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 352706703474936961}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &352706703474936961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659671178222636469}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.09100002, z: 0.2465}
+  m_LocalScale: {x: 0.0351379, y: 0.036617942, z: 0.21680951}
+  m_Children: []
+  m_Father: {fileID: 2890396611619753913}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2890396609533601723
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +184,7 @@ Transform:
   - {fileID: 2890396611100630531}
   - {fileID: 2890396610739400303}
   m_Father: {fileID: 2890396611619753913}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -31.895, y: 0, z: 0}
 --- !u!114 &2890396609740616984
 MonoBehaviour:
@@ -1012,7 +1042,7 @@ Transform:
   m_LocalScale: {x: 0.0351379, y: 0.036617942, z: 0.21680951}
   m_Children: []
   m_Father: {fileID: 2890396611619753913}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2890396610937087153
 MeshFilter:
@@ -1534,6 +1564,7 @@ Transform:
   m_Children:
   - {fileID: 2890396611543285469}
   - {fileID: 4256990040976546842}
+  - {fileID: 352706703474936961}
   - {fileID: 2890396610937087166}
   - {fileID: 2890396609740616985}
   m_Father: {fileID: 0}
@@ -1694,10 +1725,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c430365ea435bd043a55b00e3f7c6fcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shoot:
+    actionPath: /actions/default/in/Shoot
+    needsReinit: 0
   bullet: {fileID: 4369168265819001936, guid: 647861efb80ccf347b9ec5a81fe05127, type: 3}
   barrel: {fileID: 2890396610937087165}
   testSpeed: 8
-  throwable: {fileID: 0}
 --- !u!114 &3432232278502846144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1742,6 +1775,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   restoreOriginalParent: 0
+  canShoot: 0
   onPickUp:
     m_PersistentCalls:
       m_Calls: []

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletDamage : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-
+    GameObject enemyRobot;
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("We hit something!");
@@ -14,6 +14,7 @@ public class BulletDamage : MonoBehaviour
         }
         else if(other.gameObject.tag == "Enemy")
         {
+            enemyRobot = other.gameObject;
             Enemy();
         }
         Destroy(gameObject);
@@ -21,13 +22,14 @@ public class BulletDamage : MonoBehaviour
 
     private void Player()
     {
-        //TODO: Make the players health go down
-
+        Debug.Log("PLayer has been hit");
+        DamageManager.instance.DamageToPlayer(5);
     }
 
     private void Enemy()
     {
-        //TODO: Make the enemy's health go down
+        Debug.Log("Enemy has been hit");
+        DamageManager.instance.DamageToRobot(5, enemyRobot.GetComponent<RobotHealth>());
     }
 
 
