@@ -1,6 +1,8 @@
 using UnityEngine;
 
-enum SidewaysDirections
+
+//Directional constants for MoveSideways
+public enum SidewaysDirections
 {
     up,
     down,
@@ -18,7 +20,7 @@ public class RobotMovement : MonoBehaviour
     private int sidewaysSpeedMultiplier = 10;
     //NOTE: for testing only
     [SerializeField]
-    private int forwardSpeedMultiplier = 2;
+    private float forwardSpeedMultiplier = 2;
     private void Start()
     {
         RobotModel = gameObject.transform.GetChild(0).gameObject;
@@ -30,19 +32,19 @@ public class RobotMovement : MonoBehaviour
         MoveForward();
 
         // NOTE: for testing purposes only
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             MoveSideways(SidewaysDirections.left);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             MoveSideways(SidewaysDirections.right);
         }
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             MoveSideways(SidewaysDirections.up);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             MoveSideways(SidewaysDirections.down);
         }
@@ -50,7 +52,7 @@ public class RobotMovement : MonoBehaviour
 
     private void MoveForward()
     {
-        RobotObject.velocity = transform.forward * forwardSpeedMultiplier;
+        RobotObject.transform.position = new Vector3(RobotObject.transform.position.x, RobotObject.transform.position.y, RobotObject.transform.position.z + forwardSpeedMultiplier);
     }
 
     private void OnCollisionEnter(Collision col)
@@ -60,7 +62,8 @@ public class RobotMovement : MonoBehaviour
             ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);
     }
 
-    private void MoveSideways(SidewaysDirections direction)
+    //This allows the robot to move the directions it needs to go
+    public void MoveSideways(SidewaysDirections direction)
     {
         if (direction == SidewaysDirections.up || direction == SidewaysDirections.down)
         {
