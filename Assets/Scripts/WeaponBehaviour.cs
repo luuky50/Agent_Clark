@@ -34,7 +34,7 @@ public class WeaponBehaviour : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        GameObject newBullet = Instantiate(bullet, barrel.transform);
+        GameObject newBullet = Instantiate(bullet, barrel.transform.position, transform.rotation);
         Rigidbody bulletRigid = newBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = transform.forward * testSpeed;
 
@@ -43,5 +43,7 @@ public class WeaponBehaviour : MonoBehaviour
         Destroy(newBullet);
         yield return null;
     }
+
+
 
 }
