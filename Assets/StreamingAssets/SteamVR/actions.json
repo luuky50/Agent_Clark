@@ -50,11 +50,11 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/DropWeapon",
+      "name": "/actions/default/in/Shoot",
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/Shoot",
+      "name": "/actions/default/in/DropWeapon",
       "type": "boolean"
     },
     {
