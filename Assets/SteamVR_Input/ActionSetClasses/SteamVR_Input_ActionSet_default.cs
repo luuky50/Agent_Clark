@@ -105,19 +105,19 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Boolean DropWeapon
-        {
-            get
-            {
-                return SteamVR_Actions.default_DropWeapon;
-            }
-        }
-        
         public virtual SteamVR_Action_Boolean Shoot
         {
             get
             {
                 return SteamVR_Actions.default_Shoot;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean DropWeapon
+        {
+            get
+            {
+                return SteamVR_Actions.default_DropWeapon;
             }
         }
         
