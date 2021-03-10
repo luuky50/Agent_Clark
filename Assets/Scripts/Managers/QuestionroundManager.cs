@@ -51,7 +51,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     {
         if (isMultipleChoice)
         {
-            QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(1).gameObject;
+            QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         }
         else
         {
