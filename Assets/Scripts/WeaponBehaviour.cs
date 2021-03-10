@@ -15,10 +15,22 @@ public class WeaponBehaviour : MonoBehaviour
     private GameObject throwable;
     private GameObject spawnPoint;
     private Throwable throwableGun;
-    
+
+    [SerializeField]
+    private WeaponData weaponData;
 
     private void Start()
     {
+        Debug.Log(weaponData.weaponName);
+
+
+
+        //The_Destroyer the_Destroyer = new The_Destroyer();
+        //the_Destroyer.SpawnWeapon();
+
+        
+
+
         
         if (gameObject.transform.GetChild(2).name == "BulletSpawn")
             spawnPoint = gameObject.transform.GetChild(2).gameObject;

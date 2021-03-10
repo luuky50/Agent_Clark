@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    GameObject enemyRobot;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("We hit something!");
-        if(other.gameObject.tag == "Player")
+        Debug.Log($"We hit: ", other.gameObject);
+        if(other.gameObject.CompareTag("Player"))
         {
             Player();
         }
-        else if(other.gameObject.tag == "Enemy")
+        else if(other.gameObject.CompareTag("Robot"))
         {
-            enemyRobot = other.gameObject;
-            Enemy();
+            GameObject enemyRobot = other.gameObject;
+
+            Enemy(enemyRobot);
         }
         Destroy(gameObject);
     }
@@ -26,10 +26,11 @@ public class Bullet : MonoBehaviour
         DamageManager.instance.DamageToPlayer(5);
     }
 
-    private void Enemy()
+    private void Enemy(GameObject enemyRobot)
     {
         Debug.Log("Enemy has been hit");
-        DamageManager.instance.DamageToRobot(5, enemyRobot.GetComponent<RobotHealth>());
+        print("currentRobot: " + enemyRobot);
+        DamageManager.instance.DamageToRobot(5, enemyRobot.GetComponentInParent<RobotHealth>());
     }
 
 
