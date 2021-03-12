@@ -7,7 +7,11 @@ LightingSettings:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: settings
+<<<<<<< Updated upstream
   serializedVersion: 2
+=======
+  serializedVersion: 3
+>>>>>>> Stashed changes
   m_GIWorkflowMode: 1
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 0
