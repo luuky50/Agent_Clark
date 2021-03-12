@@ -42,20 +42,28 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     private void Start()
     {
         // TODO: initialize this only when we are in a scene where this is relevant
-        isMultipleChoice = true;
+        isMultipleChoice = false;
         InitializeQuestionRoundUI();
 
     }
 
     private void InitializeQuestionRoundUI()
+
+
     {
         if (isMultipleChoice)
         {
             QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+            QuestionRoundPanel.transform.GetChild(0).gameObject.SetActive(true);
+            QuestionRoundPanel.transform.GetChild(1).gameObject.SetActive(false);
+            QuestionRoundPanel.transform.GetChild(2).gameObject.SetActive(true);
         }
         else
         {
             QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+            QuestionRoundPanel.transform.GetChild(0).gameObject.SetActive(false);
+            QuestionRoundPanel.transform.GetChild(1).gameObject.SetActive(true);
+            QuestionRoundPanel.transform.GetChild(2).gameObject.SetActive(false);
         }
     }
 
@@ -88,16 +96,22 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
             InitializeAnswersOfTeamsList();
             correctAnswer = Random.Range(0, 3);
             currentMultipleChoiceQuestion = multipleChoiceQuestions[Random.Range(0, multipleChoiceQuestions.Count - 1)];
-            QuestionRoundPanel.transform.GetChild(0).GetComponent<Text>().text = currentMultipleChoiceQuestion.Question;
-            var answers = QuestionRoundPanel.transform.GetChild(1).GetComponentsInChildren<Text>();
+            QuestionRoundPanel.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = currentMultipleChoiceQuestion.Question;
+            var answers = QuestionRoundPanel.transform.GetChild(2).GetComponentsInChildren<Text>();
 
-            int goodQuestionPosition = Random.Range(0, 4);
+            int goodQuestionPosition = Random.Range(0, 3);
             answers[goodQuestionPosition].text = currentMultipleChoiceQuestion.Answer;
+
+            List<string> wrongAnswers = new List<string>() {
+                {currentMultipleChoiceQuestion.WrongAnswerOne },
+                {currentMultipleChoiceQuestion.WrongAnswerTwo },
+                {currentMultipleChoiceQuestion.WrongAnswerThree }
+            };
             for (int i = 0; i < answers.Length; i++)
             {
                 if (goodQuestionPosition != i)
                 {
-                    answers[i].text = currentMultipleChoiceQuestion.WrongAnswerOne;
+                    answers[i].text = wrongAnswers[Random.Range(0, 3)];
                 }
             }
 
