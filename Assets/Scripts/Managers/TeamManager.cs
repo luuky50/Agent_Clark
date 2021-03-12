@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class TeamManager : SingletonComponent<TeamManager>
 {
-    private Dictionary<int, List<Participant>> teams = new Dictionary<int, List<Participant>>();
-    void Start()
-    {
-        // TODO: for showcase purposes only
-        InitializeTeamInstances(4);
-    }
+    // keeps track of all the participants
+    public List<Participant> Participants = new List<Participant>();
+    // setting of how much teams there should be
+    public int amountOfTeams = 3;
 
     void Update()
     {
@@ -21,28 +19,21 @@ public class TeamManager : SingletonComponent<TeamManager>
         }
     }
 
-    // TODO: This should happen when beginning a game. Called in LevelManager?
-    void InitializeTeamInstances(int amountOfTeams)
-    {
-        for (int i = 0; i < amountOfTeams; i++)
-        {
-            List<Participant> _participantsOfTeam = new List<Participant>();
-            teams.Add(i, _participantsOfTeam);
-        }
-    }
-
     /// <summary>
     /// Adds a given participant to the given 'teamIndex'
     /// </summary>
     /// <param name="participant"></param>
-    /// <param name="teamIndex"></param>
-    public void addParticipant(Participant participant, int teamIndex)
+    public void addParticipant(Participant participant)
     {
         try
         {
-            List<Participant> _participantsOfTeam = new List<Participant>(teams[teamIndex]);
-           _participantsOfTeam.Add(participant);
-            teams[teamIndex] = _participantsOfTeam;
+            if (participant.team <= amountOfTeams)
+            {
+                Participants.Add(new Participant(participant.ParticipantID, participant.team));
+            } else
+            {
+                throw new Exception("given team index exceeds given max amount of teams!");
+            }
         }
         catch (Exception e)
         {
@@ -53,12 +44,9 @@ public class TeamManager : SingletonComponent<TeamManager>
     // TODO: for showcase purposes only
     void DebugAll()
     {
-        foreach (KeyValuePair<int, List<Participant>> kvp in teams)
+        foreach (var item in Participants)
         {
-            foreach(Participant item in kvp.Value)
-            {
-                Debug.Log(item.ParticipantID);
-            }
+            Debug.Log(item.team + "  " + item.ParticipantID); 
         }
     }
 }
@@ -68,9 +56,11 @@ public class TeamManager : SingletonComponent<TeamManager>
 /// </summary>
 public class Participant
 {
-    public string ParticipantID;
-    public Participant(string newParticipantID)
+    public int ParticipantID;
+    public int team;
+    public Participant(int newParticipantID, int newTeam)
     {
         ParticipantID = newParticipantID;
+        team = newTeam;
     }
 }
