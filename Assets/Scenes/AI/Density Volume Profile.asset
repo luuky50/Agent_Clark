@@ -122,36 +122,6 @@ MonoBehaviour:
   texture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
---- !u!114 &-2058457274097998330
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29fa0085f50d5e54f8144f766051a691, type: 3}
-  m_Name: FilmGrain
-  m_EditorClassIdentifier: 
-  active: 0
-  m_AdvancedMode: 0
-  type:
-    m_OverrideState: 1
-    m_Value: 2
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.408
-    min: 0
-    max: 1
-  response:
-    m_OverrideState: 0
-    m_Value: 0.8
-    min: 0
-    max: 1
-  texture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
 --- !u!114 &-1786981832336548926
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -280,29 +250,6 @@ MonoBehaviour:
     m_Value: 1
     min: 0
     max: 1
---- !u!114 &-19005085286471027
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
-  m_Name: LiftGammaGain
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  lift:
-    m_OverrideState: 0
-    m_Value: {x: 1, y: 0.99203366, z: 0.88471526, w: 0}
-  gamma:
-    m_OverrideState: 1
-    m_Value: {x: 1, y: 0.8398934, z: 0.95030963, w: 0.00000010344559}
-  gain:
-    m_OverrideState: 1
-    m_Value: {x: 0.5949503, y: 0.6380503, z: 1, w: -0.000000005523603}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,12 +263,13 @@ MonoBehaviour:
   m_Name: Density Volume Profile
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 2206081129832763115}
-  - {fileID: 7674360101880407657}
-  - {fileID: 4970911092214840669}
-  - {fileID: 1757880648287377884}
-  - {fileID: -19005085286471027}
-  - {fileID: -2058457274097998330}
+  - {fileID: -1723380889151379669}
+  - {fileID: -1567782595226060772}
+  - {fileID: 3773923922759496880}
+  - {fileID: 220758481732537039}
+  - {fileID: -7733671217992228719}
+  - {fileID: -2526603613213502151}
+  - {fileID: -1786981832336548926}
 --- !u!114 &220758481732537039
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -360,6 +308,8 @@ MonoBehaviour:
     m_Value: 0
     min: -100
     max: 100
+<<<<<<< Updated upstream
+=======
 --- !u!114 &1757880648287377884
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -395,7 +345,7 @@ MonoBehaviour:
     max: 180
   saturation:
     m_OverrideState: 1
-    m_Value: -34.3
+    m_Value: -23.5
     min: -100
     max: 100
 --- !u!114 &2206081129832763115
@@ -431,7 +381,7 @@ MonoBehaviour:
     min: 0
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.4448202, g: 0.7924528, b: 0.62615716, a: 1}
+    m_Value: {r: 0.7983268, g: 0.8679245, b: 0.8350806, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
@@ -450,6 +400,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
     min: 0
+>>>>>>> Stashed changes
 --- !u!114 &3773923922759496880
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -503,56 +454,3 @@ MonoBehaviour:
   m_HighQualityFiltering:
     m_OverrideState: 0
     m_Value: 1
---- !u!114 &4970911092214840669
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
-  m_Name: Tonemapping
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  mode:
-    m_OverrideState: 1
-    m_Value: 2
---- !u!114 &7674360101880407657
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
-  m_Name: Vignette
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  color:
-    m_OverrideState: 1
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
-    hdr: 0
-    showAlpha: 0
-    showEyeDropper: 1
-  center:
-    m_OverrideState: 0
-    m_Value: {x: 0.5, y: 0.5}
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.468
-    min: 0
-    max: 1
-  smoothness:
-    m_OverrideState: 0
-    m_Value: 0.2
-    min: 0.01
-    max: 1
-  rounded:
-    m_OverrideState: 0
-    m_Value: 0

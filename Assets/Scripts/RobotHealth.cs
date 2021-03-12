@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RobotHealth : MonoBehaviour
 {
-    [SerializeField]
     private float health;
     private float damage;
     
