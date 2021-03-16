@@ -5,6 +5,7 @@ using UnityEngine;
 public class HackBulletController : MonoBehaviour
 {
     [SerializeField] RobotMovement robotMovement;
+    bool hackBulletActive = false;
     void Start()
     {
 
@@ -15,10 +16,18 @@ public class HackBulletController : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime * 10;
+        if (hackBulletActive)
+        {
+            hackBullet();
+        }
+    }
+
+    void hackBullet()
+    {
         if (timer > interval)
         {
             int leftRight = Random.Range(0, 2);
-                Debug.Log(leftRight);
+
             if (leftRight == 0)
             {
                 robotMovement.MoveSideways(SidewaysDirections.left);
@@ -28,7 +37,7 @@ public class HackBulletController : MonoBehaviour
             {
                 robotMovement.MoveSideways(SidewaysDirections.down);
                 robotMovement.MoveSideways(SidewaysDirections.right);
-             //   Debug.Log("1");
+                //   Debug.Log("1");
             }
 
             timer = 0;
