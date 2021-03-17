@@ -20,7 +20,7 @@ public class RobotMovement : MonoBehaviour
     private int sidewaysSpeedMultiplier = 10;
     //NOTE: for testing only
     [SerializeField]
-    private float forwardSpeedMultiplier = 2;
+    private float forwardSpeedMultiplier = 0;
     private void Start()
     {
         RobotModel = gameObject.transform.GetChild(0).gameObject;
@@ -60,6 +60,15 @@ public class RobotMovement : MonoBehaviour
         onWall = col.gameObject.tag == "vertical" ? true : false;
         RobotModel.transform.eulerAngles = col.gameObject.tag == "vertical"
             ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);
+
+        if (col.transform.tag == "Player")
+        {
+            this.transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
+         
+        }
+        else if (col.transform.tag == "End") {
+            transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
+        }
     }
 
     //This allows the robot to move the directions it needs to go
@@ -75,7 +84,7 @@ public class RobotMovement : MonoBehaviour
         {
             if (!onWall)
                 RobotObject.velocity = (direction == SidewaysDirections.right
-                    ? Vector3.left : Vector3.right) * sidewaysSpeedMultiplier;
+                    ? Vector3.right : Vector3.left) * sidewaysSpeedMultiplier;
         }
     }
 }
