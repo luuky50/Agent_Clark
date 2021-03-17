@@ -21,7 +21,7 @@ public class RobotHealth : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             OutgoingDamage(damage);
-            Destroy(this.gameObject);
+       
         }
     }
 

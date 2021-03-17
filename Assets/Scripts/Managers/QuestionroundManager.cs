@@ -38,37 +38,43 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
 
     private KeyValuePair<string, string> currentQuestion;
     private int correctAnswer;
-    private bool isMultipleChoice;
+
     private void Start()
     {
         // TODO: initialize this only when we are in a scene where this is relevant
-        isMultipleChoice = false;
-        InitializeQuestionRoundUI();
+  //      InitializeQuestionRoundUI();
 
     }
 
-    private void InitializeQuestionRoundUI()
+    public void InitializeQuestionRoundUI(bool isMultipleChoice)
 
 
     {
+
         if (isMultipleChoice)
         {
             QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+            QuestionRoundPanel.SetActive(true);
             QuestionRoundPanel.transform.GetChild(0).gameObject.SetActive(true);
             QuestionRoundPanel.transform.GetChild(1).gameObject.SetActive(false);
             QuestionRoundPanel.transform.GetChild(2).gameObject.SetActive(true);
+            BeginQuestionRound(isMultipleChoice);
         }
         else
         {
+            QuestionRoundPanel.SetActive(true);
             QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
             QuestionRoundPanel.transform.GetChild(0).gameObject.SetActive(false);
             QuestionRoundPanel.transform.GetChild(1).gameObject.SetActive(true);
             QuestionRoundPanel.transform.GetChild(2).gameObject.SetActive(false);
+            BeginQuestionRound(isMultipleChoice);
+
         }
     }
 
     private void InitializeAnswersOfTeamsList()
     {
+        PlayerAnswersOfMultipleChoice = new Dictionary<int, Dictionary<int, bool>>();
         for (int i = 0; i < TeamManager.instance.amountOfTeams; i++)
         {
             PlayerAnswersOfMultipleChoice.Add(i, new Dictionary<int, bool>());
@@ -79,17 +85,13 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
 
     private void Update()
     {
-        // TODO: Implement logic for when rounds should begin
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            BeginQuestionRound();
-        }
+
     }
 
     /// <summary>
     /// Handles initiation of a questionround. 
     /// </summary>
-    public void BeginQuestionRound()
+    public void BeginQuestionRound(bool isMultipleChoice)
     {
         if (isMultipleChoice)
         {
@@ -120,6 +122,15 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         {
             currentQuestion = OpenQuestions.ElementAt(Random.Range(0, OpenQuestions.Count - 1));
             QuestionRoundPanel.GetComponentInChildren<Text>().text = currentQuestion.Key;
+        }
+    }
+
+    public void EndQuestionRound() {
+        QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
+        QuestionRoundPanel.SetActive(false);
+        if (ExtrasManager.instance.isMultipleChoice)
+        {
+            ExtrasManager.instance.GivePowerupToRobot();
         }
     }
 
@@ -180,13 +191,15 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     {
         if (currentQuestion.Value == Answer)
         {
-            Debug.Log("Question Answerd Right!");
+            ExtrasManager.instance.GivePowerupToRobot();
         }
         else
         {
             Debug.Log("Question Answerd Wrong!");
         }
     }
+
+    
 
     private void setUIPanel()
     {

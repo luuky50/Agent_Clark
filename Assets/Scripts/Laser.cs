@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Laser : SingletonComponent<Laser>
 {
     public GameObject emitObject;
     public LineRenderer lr;
 
     float timer = 0;
-    int timeToAim = 20;
+    int timeToAim = 5;
 
     private void Start()
     {
@@ -17,11 +17,7 @@ public class Laser : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
-            timer = 0;
-        }
+    
 
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -43,15 +39,10 @@ public class Laser : MonoBehaviour
             EndShoot();
         }
     }
-    void Shoot()
+   public void Shoot()
     {
         lr.SetPosition(1, new Vector3(0, 0, 50));
-
-        if (Physics.Raycast(emitObject.transform.position, emitObject.transform.forward, out hit))
-        {
-
-        }
-
+        timer = 0;
     }
 
 
