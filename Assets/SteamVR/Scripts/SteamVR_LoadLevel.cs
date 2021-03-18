@@ -75,6 +75,9 @@ namespace Valve.VR
         // Most scenes should hopefully not require this.
         public float postLoadSettleTime = 0.0f;
 
+        // Used for waiting untill the loading screen fades in
+        public float postLoadTime = 0.0f;
+
         // Time to fade loading screen in and out (also used for progress bar).
         public float loadingScreenFadeInTime = 1.0f;
         public float loadingScreenFadeOutTime = 0.25f;
@@ -251,6 +254,8 @@ namespace Valve.VR
             }
 
             _active = this;
+
+            yield return new WaitForSeconds(postLoadTime);
 
             SteamVR_Events.Loading.Send(true);
 
@@ -439,7 +444,7 @@ namespace Valve.VR
                     overlay.HideOverlay(loadingScreenOverlayHandle);
             }
 
-            Destroy(gameObject);
+            //Destroy(gameObject);
 
             _active = null;
 

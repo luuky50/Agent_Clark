@@ -56,17 +56,8 @@ public class LiftManager : SingletonComponent<LiftManager>
 
     }*/
 
-    public void LoadSceneInt(int sceneNumber)
-    {
-        CloseLift(null, sceneNumber);
-    }
 
-    public void LoadSceneString(string sceneName)
-    {
-        Debug.Log("Button Pressed with string");
-        CloseLift(sceneName, 0);
 
-    }
 
     public void OpenLift()
     {
@@ -79,22 +70,21 @@ public class LiftManager : SingletonComponent<LiftManager>
         }
     }
 
-    private void CloseLift(string _sceneName, int _sceneNumber)
+    public void CloseLift(string _sceneName)
     {
         //Sequence sequenceLift = DOTween.Sequence();
         print(_sceneName);
-        print(_sceneNumber);
         foreach (var item in doors)
         {
             item.transform.DOLocalMove(endPointLift.position, secondsToWaitLift);
         }
 
-        StartCoroutine(LoadScene(_sceneName, _sceneNumber));
-
+        LevelManager.instance.LoadLevel(_sceneName, 5);
 
 
     }
-    IEnumerator LoadScene(string _sceneName, int _sceneNumber)
+
+    /*IEnumerator LoadScene(string _sceneName, int _sceneNumber)
     {
         AsyncOperation asyncOperationLoad = null;
 
@@ -113,7 +103,7 @@ public class LiftManager : SingletonComponent<LiftManager>
             yield return null;
         }
 
-    }
+    }*/
 
 
 

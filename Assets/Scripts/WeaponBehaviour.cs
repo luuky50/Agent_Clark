@@ -9,6 +9,8 @@ public class WeaponBehaviour : MonoBehaviour
     public SteamVR_Action_Boolean shoot = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("ShootWeapon");
     private SteamVR_Input_Sources inputSource;
 
+    private InteractableHoverEvents interactableHoverEvents = null;
+
     public GameObject bullet;
     public GameObject barrel;
     public float testSpeed = 4;
@@ -23,15 +25,24 @@ public class WeaponBehaviour : MonoBehaviour
     {
         Debug.Log(weaponData.weaponName);
 
+        interactableHoverEvents = this.gameObject.GetComponent<InteractableHoverEvents>();
+
+        interactableHoverEvents.onAttachedToHand.AddListener(() =>
+        {
+            if (LevelManager.instance.currentScene.name == "AI")
+            {
+                ExtrasManager.instance.extraManagerInit();
+            }
+        });
 
 
         //The_Destroyer the_Destroyer = new The_Destroyer();
         //the_Destroyer.SpawnWeapon();
 
-        
 
 
-        
+
+
         if (gameObject.transform.GetChild(2).name == "BulletSpawn")
             spawnPoint = gameObject.transform.GetChild(2).gameObject;
         else
@@ -63,7 +74,7 @@ public class WeaponBehaviour : MonoBehaviour
         Destroy(newBullet);
         yield return null;
     }
- 
+
 
 
 }

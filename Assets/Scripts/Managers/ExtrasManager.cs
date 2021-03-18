@@ -2,47 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ExtrasManager : SingletonComponent<ExtrasManager>
 {
-    bool isPlaying = true;
+    public bool isPlaying = false;
     bool questionIsActive = false;
     int timeUntillStartQuestionRound = 30;
     float timer;
-   public bool isMultipleChoice;
+    public bool isMultipleChoice;
     public Text timeLeft;
 
     float timeLeftToAnswer = 20;
-    void Update()
+
+    public void extraManagerInit()
     {
-        if (isPlaying)
+
+        isPlaying = true;
+        StartCoroutine(StartPlaying());
+    }
+
+    IEnumerator StartPlaying()
+    {
+        while (isPlaying)
         {
             timeLeftToAnswer -= Time.deltaTime;
             timer += Time.deltaTime;
-     
-            timeLeft.text = ((int) timeLeftToAnswer).ToString();
-        }
 
-        if (timer > timeUntillStartQuestionRound)
-        {
-            timer = 0;
-            timeLeftToAnswer = 20;
-            _StartQuestionRound();
-            questionIsActive = true;
-        }
-        if (questionIsActive)
-        {
-            if (timeLeftToAnswer < 0.1f)
+            timeLeft.text = ((int)timeLeftToAnswer).ToString();
+
+            if (timer > timeUntillStartQuestionRound)
             {
-                questionIsActive = false;
-                _EndQuestionRound();
-                if (isMultipleChoice)
+                timer = 0;
+                timeLeftToAnswer = 20;
+                _StartQuestionRound();
+                questionIsActive = true;
+            }
+            if (questionIsActive)
+            {
+                if (timeLeftToAnswer < 0.1f)
                 {
-                    //  GivePowerupToRobot();
+                    questionIsActive = false;
+                    _EndQuestionRound();
+                    yield return null;
                 }
             }
         }
     }
+
+
 
     private void _StartQuestionRound()
     {
@@ -62,7 +70,8 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
         {
             SwarmManager.instance.ShootTheSwarm();
         }
-        else {
+        else
+        {
             Laser.instance.Shoot();
         }
     }

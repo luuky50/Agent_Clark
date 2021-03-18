@@ -7,9 +7,14 @@ public class DamageManager : SingletonComponent<DamageManager>
     List<RobotHealth> robotHealths = new List<RobotHealth>();
     [SerializeField]
     private PlayerHealth playerHealth;
-    void Start()
+
+    public void Init()
     {
         playerHealth = GameObject.FindGameObjectWithTag("PlayerHealth").GetComponent<PlayerHealth>();
+    }
+
+    void Start()
+    {
         foreach (GameObject item in GameObject.FindGameObjectsWithTag("Robot"))
         {
             robotHealths.Add(item.GetComponent<RobotHealth>());

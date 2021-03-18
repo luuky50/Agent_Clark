@@ -58,7 +58,7 @@ public class RobotHealth : MonoBehaviour
         deathCount++;
         if (deathCount == 4)
         {
-            SceneManager.LoadScene(3);
+            LevelManager.instance.LoadLevel("EndGame", 0);
         }
     }
 }

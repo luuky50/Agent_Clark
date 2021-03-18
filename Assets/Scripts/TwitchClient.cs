@@ -13,21 +13,27 @@ public class TwitchClient : SingletonComponent<TwitchClient>
     [SerializeField] //[SerializeField] Allows the private field to show up in Unity's inspector. Way better than just making it public
     private string _channelToConnectTo = Secrets.USERNAME_FROM_OAUTH_TOKEN;
 
-    public RobotMovement robotMovement;
-
+    //private RobotMovement robotMovement;
     [SerializeField]
-    private bool isMainMenu = false;
+    private RobotManager robotManager;
+
+    //[SerializeField]
+    //private bool isMainMenu = false;
 
     private Client _client;
 
-    private void Start()
+    public void StartTwitch(Text twitchName)
     {
         // To keep the Unity application active in the background, you can enable "Run In Background" in the player settings:
         // Unity Editor --> Edit --> Project Settings --> Player --> Resolution and Presentation --> Resolution --> Run In Background
         // This option seems to be enabled by default in more recent versions of Unity. An aditional, less recommended option is to set it in code:
         // Application.runInBackground = true;
-        if(!isMainMenu)
-            robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
+        ChangeTwitchName(twitchName);
+        LevelManager.instance.LoadLevel("Tutorial", 0);
+        //robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
+
+        
+
 
         //Create Credentials instance
         ConnectionCredentials credentials = new ConnectionCredentials(Secrets.USERNAME_FROM_OAUTH_TOKEN, Secrets.OAUTH_TOKEN);
@@ -52,16 +58,9 @@ public class TwitchClient : SingletonComponent<TwitchClient>
 
     }
 
-    public void ChangeTwitchName(Text twitchName)
+    private void ChangeTwitchName(Text twitchName)
     {
         _channelToConnectTo = twitchName.text;
-    }
-    private void Update()
-    {
-        if(robotMovement == null && !isMainMenu)
-        {
-            robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
-        }
     }
 
     private void _client_OnWhisperReceived(object sender, TwitchLib.Client.Events.OnWhisperReceivedArgs e)
@@ -124,21 +123,22 @@ public class TwitchClient : SingletonComponent<TwitchClient>
     {
         switch (e.Command.CommandText)
         {
+            //TODO: Replace commented movement with robotmanager for multipile robots
             case "right":
                 _client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot to the right");
-                robotMovement.MoveSideways(SidewaysDirections.right);
+                //robotMovement.MoveSideways(SidewaysDirections.right);
                 break;
             case "left":
                 _client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot to the left");
-                robotMovement.MoveSideways(SidewaysDirections.left);
+                //robotMovement.MoveSideways(SidewaysDirections.left);
                 break;
             case "up":
                 _client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot up");
-                robotMovement.MoveSideways(SidewaysDirections.up);
+                //robotMovement.MoveSideways(SidewaysDirections.up);
                 break;
             case "down":
                 _client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot down");
-                robotMovement.MoveSideways(SidewaysDirections.down);
+                //robotMovement.MoveSideways(SidewaysDirections.down);
                 break;
             default:
                 break;
