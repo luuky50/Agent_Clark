@@ -6,7 +6,7 @@ using Valve.VR.InteractionSystem;
 
 public class WeaponBehaviour : MonoBehaviour
 {
-    public SteamVR_Action_Boolean shoot = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("Shoot");
+    public SteamVR_Action_Boolean shoot = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("ShootWeapon");
     private SteamVR_Input_Sources inputSource;
 
     public GameObject bullet;

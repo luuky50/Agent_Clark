@@ -5,6 +5,7 @@ using System;
 using TwitchLib.Client.Models;
 using TwitchLib.Unity;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TwitchClient : SingletonComponent<TwitchClient>
@@ -14,6 +15,9 @@ public class TwitchClient : SingletonComponent<TwitchClient>
 
     public RobotMovement robotMovement;
 
+    [SerializeField]
+    private bool isMainMenu = false;
+
     private Client _client;
 
     private void Start()
@@ -22,7 +26,8 @@ public class TwitchClient : SingletonComponent<TwitchClient>
         // Unity Editor --> Edit --> Project Settings --> Player --> Resolution and Presentation --> Resolution --> Run In Background
         // This option seems to be enabled by default in more recent versions of Unity. An aditional, less recommended option is to set it in code:
         // Application.runInBackground = true;
-        robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
+        if(!isMainMenu)
+            robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
 
         //Create Credentials instance
         ConnectionCredentials credentials = new ConnectionCredentials(Secrets.USERNAME_FROM_OAUTH_TOKEN, Secrets.OAUTH_TOKEN);
@@ -47,9 +52,13 @@ public class TwitchClient : SingletonComponent<TwitchClient>
 
     }
 
+    public void ChangeTwitchName(Text twitchName)
+    {
+        _channelToConnectTo = twitchName.text;
+    }
     private void Update()
     {
-        if(robotMovement == null)
+        if(robotMovement == null && !isMainMenu)
         {
             robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
         }

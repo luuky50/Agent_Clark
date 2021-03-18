@@ -39,7 +39,7 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_default_SnapTurnRight;
         
-        private static SteamVR_Action_Boolean p_default_Shoot;
+        private static SteamVR_Action_Boolean p_default_ShootWeapon;
         
         private static SteamVR_Action_Boolean p_default_DropWeapon;
         
@@ -147,11 +147,11 @@ namespace Valve.VR
             }
         }
         
-        public static SteamVR_Action_Boolean default_Shoot
+        public static SteamVR_Action_Boolean default_ShootWeapon
         {
             get
             {
-                return SteamVR_Actions.p_default_Shoot.GetCopy<SteamVR_Action_Boolean>();
+                return SteamVR_Actions.p_default_ShootWeapon.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
@@ -241,7 +241,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_HeadsetOnHead,
                     SteamVR_Actions.default_SnapTurnLeft,
                     SteamVR_Actions.default_SnapTurnRight,
-                    SteamVR_Actions.default_Shoot,
+                    SteamVR_Actions.default_ShootWeapon,
                     SteamVR_Actions.default_DropWeapon,
                     SteamVR_Actions.default_Haptic,
                     SteamVR_Actions.platformer_Move,
@@ -263,7 +263,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_HeadsetOnHead,
                     SteamVR_Actions.default_SnapTurnLeft,
                     SteamVR_Actions.default_SnapTurnRight,
-                    SteamVR_Actions.default_Shoot,
+                    SteamVR_Actions.default_ShootWeapon,
                     SteamVR_Actions.default_DropWeapon,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
@@ -287,7 +287,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_HeadsetOnHead,
                     SteamVR_Actions.default_SnapTurnLeft,
                     SteamVR_Actions.default_SnapTurnRight,
-                    SteamVR_Actions.default_Shoot,
+                    SteamVR_Actions.default_ShootWeapon,
                     SteamVR_Actions.default_DropWeapon,
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Brake,
@@ -311,7 +311,7 @@ namespace Valve.VR
                     SteamVR_Actions.default_HeadsetOnHead,
                     SteamVR_Actions.default_SnapTurnLeft,
                     SteamVR_Actions.default_SnapTurnRight,
-                    SteamVR_Actions.default_Shoot,
+                    SteamVR_Actions.default_ShootWeapon,
                     SteamVR_Actions.default_DropWeapon,
                     SteamVR_Actions.platformer_Move,
                     SteamVR_Actions.platformer_Jump,
@@ -334,7 +334,7 @@ namespace Valve.VR
             SteamVR_Actions.p_default_HeadsetOnHead = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/HeadsetOnHead")));
             SteamVR_Actions.p_default_SnapTurnLeft = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/SnapTurnLeft")));
             SteamVR_Actions.p_default_SnapTurnRight = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/SnapTurnRight")));
-            SteamVR_Actions.p_default_Shoot = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/Shoot")));
+            SteamVR_Actions.p_default_ShootWeapon = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/ShootWeapon")));
             SteamVR_Actions.p_default_DropWeapon = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/default/in/DropWeapon")));
             SteamVR_Actions.p_default_Haptic = ((SteamVR_Action_Vibration)(SteamVR_Action.Create<SteamVR_Action_Vibration>("/actions/default/out/Haptic")));
             SteamVR_Actions.p_platformer_Move = ((SteamVR_Action_Vector2)(SteamVR_Action.Create<SteamVR_Action_Vector2>("/actions/platformer/in/Move")));

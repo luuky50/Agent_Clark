@@ -22,7 +22,6 @@ public class RobotMovement : MonoBehaviour
     [SerializeField]
     private float forwardSpeedMultiplier = 0;
 
-    int botsCount;
     private void Start()
     {
         RobotModel = gameObject.transform.GetChild(0).gameObject;
@@ -70,12 +69,7 @@ public class RobotMovement : MonoBehaviour
         if (col.transform.CompareTag("PlayerHealth"))
         {
             this.transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
-            botsCount++;
             DamageManager.instance.DamageToPlayer(20);
-            if(botsCount == 4)
-            {
-                LiftManager.instance.LoadSceneInt(2);
-            }
         }
         else if (col.transform.CompareTag("End")) {
             transform.position = new Vector3(-11.5f, 2.8f, -19.08f);

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659671178222636469}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.09100002, z: 0.2465}
+  m_LocalPosition: {x: 0, y: 0.09100002, z: 0.3322}
   m_LocalScale: {x: 0.0351379, y: 0.036617942, z: 0.21680951}
   m_Children: []
   m_Father: {fileID: 2890396611619753913}
@@ -1071,7 +1071,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b59439bb7ec97934eb2fd47278febfb4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1464,7 +1464,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b59439bb7ec97934eb2fd47278febfb4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1726,9 +1726,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shoot:
-    actionPath: /actions/default/in/Shoot
+    actionPath: /actions/default/in/ShootWeapon
     needsReinit: 0
-  bullet: {fileID: 4369168265819001936, guid: 647861efb80ccf347b9ec5a81fe05127, type: 3}
+  bullet: {fileID: 7551039554679695360, guid: 62109083dfe21984c9759d19612219b9, type: 3}
   barrel: {fileID: 2890396610937087165}
   testSpeed: 20
   weaponData: {fileID: 11400000, guid: efe3a456e219bbe418391046f0287d42, type: 2}
@@ -1847,7 +1847,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b59439bb7ec97934eb2fd47278febfb4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

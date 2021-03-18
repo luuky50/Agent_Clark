@@ -7,7 +7,7 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
 {
     bool isPlaying = true;
     bool questionIsActive = false;
-    int timeUntillStartQuestionRound = 40;
+    int timeUntillStartQuestionRound = 30;
     float timer;
    public bool isMultipleChoice;
     public Text timeLeft;
