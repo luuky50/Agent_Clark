@@ -5,14 +5,14 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using Valve.VR.InteractionSystem;
 
-public class LiftManager : MonoBehaviour
+public class LiftManager : SingletonComponent<LiftManager>
 {
 
     private int secondsToWaitLift = 5;
     private bool isLiftClosed;
 
-    Sequence sequenceLift = DOTween.Sequence();
-    Tween liftTween;
+ 
+    //Tween liftTween;
 
 
     [SerializeField]
@@ -22,8 +22,11 @@ public class LiftManager : MonoBehaviour
     [SerializeField]
     private Transform endPointLift;
 
-
-
+    private void Start()
+    {
+        DOTween.Init();
+        //doors.Add()
+    }
     /*private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Y))
@@ -67,7 +70,7 @@ public class LiftManager : MonoBehaviour
 
     public void OpenLift()
     {
-        liftTween.Rewind();
+        //liftTween.Rewind();
         foreach (var item in doors)
         {
             //sequenceLift.Append(item.transform.DOSmoothRewind());
@@ -78,15 +81,12 @@ public class LiftManager : MonoBehaviour
 
     private void CloseLift(string _sceneName, int _sceneNumber)
     {
+        //Sequence sequenceLift = DOTween.Sequence();
         print(_sceneName);
         print(_sceneNumber);
-        sequenceLift.SetAutoKill(false);
         foreach (var item in doors)
         {
-            sequenceLift.Append(item.transform.DOLocalMove(endPointLift.position, secondsToWaitLift)).OnComplete(() =>
-            {
-                isLiftClosed = true;
-            });
+            item.transform.DOLocalMove(endPointLift.position, secondsToWaitLift);
         }
 
         StartCoroutine(LoadScene(_sceneName, _sceneNumber));
@@ -100,10 +100,13 @@ public class LiftManager : MonoBehaviour
 
         yield return new WaitForSeconds(secondsToWaitLift);
         if (_sceneName == null)
+        {
             asyncOperationLoad = SceneManager.LoadSceneAsync(_sceneNumber);
+        }
         else
             asyncOperationLoad = SceneManager.LoadSceneAsync(_sceneName);
 
+        Destroy(Player.instance.gameObject);
 
         while (!asyncOperationLoad.isDone)
         {

@@ -5,8 +5,9 @@ using System;
 using TwitchLib.Client.Models;
 using TwitchLib.Unity;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class TwitchClient : MonoBehaviour
+public class TwitchClient : SingletonComponent<TwitchClient>
 {
     [SerializeField] //[SerializeField] Allows the private field to show up in Unity's inspector. Way better than just making it public
     private string _channelToConnectTo = Secrets.USERNAME_FROM_OAUTH_TOKEN;
@@ -44,6 +45,14 @@ public class TwitchClient : MonoBehaviour
         // Connect
         _client.Connect();
 
+    }
+
+    private void Update()
+    {
+        if(robotMovement == null)
+        {
+            robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
+        }
     }
 
     private void _client_OnWhisperReceived(object sender, TwitchLib.Client.Events.OnWhisperReceivedArgs e)

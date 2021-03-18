@@ -31,7 +31,12 @@ public class RobotHealth : MonoBehaviour
     /// <param name="damage"></param>
     public void IngoingDamage(float damage)
     {
-        health -= damage;
+        Debug.Log("Got some damage: " + damage);
+        if (health > 0)
+            health -= damage;
+        else
+            Death();
+
     }
 
     /// <summary>
@@ -41,5 +46,11 @@ public class RobotHealth : MonoBehaviour
     public void OutgoingDamage(float damage)
     {
         DamageManager.instance.DamageToPlayer(damage);
+    }
+
+    private void Death()
+    {
+        this.transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
+        health = 100;
     }
 }

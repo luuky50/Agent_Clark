@@ -6,7 +6,7 @@ using Valve.VR.InteractionSystem;
 
 public class WeaponBehaviour : MonoBehaviour
 {
- /*   public SteamVR_Action_Boolean shoot = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("Shoot");
+    public SteamVR_Action_Boolean shoot = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("Shoot");
     private SteamVR_Input_Sources inputSource;
 
     public GameObject bullet;
@@ -59,11 +59,11 @@ public class WeaponBehaviour : MonoBehaviour
         bulletRigid.velocity = transform.forward * testSpeed;
 
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(8f);
         Destroy(newBullet);
         yield return null;
     }
- */
+ 
 
 
 }

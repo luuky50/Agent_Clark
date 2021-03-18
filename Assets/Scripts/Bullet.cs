@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"We hit: ", other.gameObject);
+        Debug.Log("We hit: " + other.gameObject.name);
         if(other.gameObject.CompareTag("Player"))
         {
             Player();
@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
     private void Enemy(GameObject enemyRobot)
     {
         Debug.Log("Enemy has been hit");
-        print("currentRobot: " + enemyRobot);
+        print("currentRobot: " + enemyRobot.name);
         DamageManager.instance.DamageToRobot(5, enemyRobot.GetComponentInParent<RobotHealth>());
     }
 

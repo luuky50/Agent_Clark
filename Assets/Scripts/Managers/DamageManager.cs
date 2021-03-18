@@ -5,15 +5,17 @@ using UnityEngine;
 public class DamageManager : SingletonComponent<DamageManager>
 {
     List<RobotHealth> robotHealths = new List<RobotHealth>();
-    PlayerHealth playerHealth;
+    [SerializeField]
+    private PlayerHealth playerHealth;
     void Start()
     {
-        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealth>();
+        playerHealth = GameObject.FindGameObjectWithTag("PlayerHealth").GetComponent<PlayerHealth>();
         foreach (GameObject item in GameObject.FindGameObjectsWithTag("Robot"))
         {
             robotHealths.Add(item.GetComponent<RobotHealth>());
         }
     }
+
     /// <summary>
     /// Handles dealing damage to player
     /// </summary>

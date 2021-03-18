@@ -1730,7 +1730,8 @@ MonoBehaviour:
     needsReinit: 0
   bullet: {fileID: 4369168265819001936, guid: 647861efb80ccf347b9ec5a81fe05127, type: 3}
   barrel: {fileID: 2890396610937087165}
-  testSpeed: 8
+  testSpeed: 20
+  weaponData: {fileID: 11400000, guid: efe3a456e219bbe418391046f0287d42, type: 2}
 --- !u!114 &3432232278502846144
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -54,6 +54,7 @@ public    GameObject swarm;
         boom.gameObject.SetActive(true);
         swarm.transform.gameObject.SetActive(false);
         boom.Play();
+        DamageManager.instance.DamageToPlayer(50);
         //main.loop = false;
     }
 }

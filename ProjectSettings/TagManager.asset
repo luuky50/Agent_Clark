@@ -12,6 +12,8 @@ TagManager:
   - horizontal
   - Robot
   - DontDestroy
+  - End
+  - PlayerHealth
   layers:
   - Default
   - TransparentFX

@@ -21,12 +21,18 @@ public class RobotMovement : MonoBehaviour
     //NOTE: for testing only
     [SerializeField]
     private float forwardSpeedMultiplier = 0;
+
+    int botsCount;
     private void Start()
     {
         RobotModel = gameObject.transform.GetChild(0).gameObject;
         RobotObject = gameObject.transform.GetComponent<Rigidbody>();
     }
 
+    public void SetSpeed(float multiplier)
+    {
+        forwardSpeedMultiplier = multiplier;
+    }
     private void Update()
     {
         MoveForward();
@@ -57,16 +63,21 @@ public class RobotMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        onWall = col.gameObject.tag == "vertical" ? true : false;
-        RobotModel.transform.eulerAngles = col.gameObject.tag == "vertical"
-            ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);
+        onWall = col.gameObject.CompareTag("vertical") ? true : false;
+        RobotModel.transform.eulerAngles = col.gameObject.CompareTag("vertical"
+) ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);
 
-        if (col.transform.tag == "Player")
+        if (col.transform.CompareTag("PlayerHealth"))
         {
             this.transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
-         
+            botsCount++;
+            DamageManager.instance.DamageToPlayer(20);
+            if(botsCount == 4)
+            {
+                LiftManager.instance.LoadSceneInt(2);
+            }
         }
-        else if (col.transform.tag == "End") {
+        else if (col.transform.CompareTag("End")) {
             transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
         }
     }
