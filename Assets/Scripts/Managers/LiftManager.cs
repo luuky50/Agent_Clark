@@ -11,8 +11,8 @@ public class LiftManager : SingletonComponent<LiftManager>
     private int secondsToWaitLift = 5;
     private bool isLiftClosed;
 
- 
-    //Tween liftTween;
+
+    List<Tween> liftTween = new List<Tween>();
 
 
     [SerializeField]
@@ -22,52 +22,32 @@ public class LiftManager : SingletonComponent<LiftManager>
     [SerializeField]
     private Transform endPointLift;
 
-    private void Start()
-    {
-        DOTween.Init();
-        //doors.Add()
-    }
-    /*private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            OpenLift();
-        }
-    }
 
     private void Start()
     {
+        OpenLift();
+    }
+
+    private void OpenLift()
+    {
+        liftTween.Clear();
         foreach (var item in doors)
         {
-            liftTween = item.transform.DOLocalMove(endPointLift.position, secondsToWaitLift);
-            liftTween.Play();
-            StartCoroutine(RewindTime());
+            Vector3 loc = endPointLift.position;
+            var tween = item.transform.DOLocalMove(loc, secondsToWaitLift);
+            liftTween.Add(tween);
+
+            Sequence s = DOTween.Sequence();
+            s.Append(tween);
+            s.AppendInterval(2.5f);
+            s.SetLoops(2, LoopType.Yoyo);
+            s.OnComplete(() => {  });
+            s.Play();
+
             //sequenceLift.Append(item.transform.DOLocalMove(endPointLift.position, secondsToWaitLift));
         }
         Debug.Log("Is the lift closed? " + isLiftClosed);
-        
         //OpenLift();
-    }
-
-    IEnumerator RewindTime()
-    {
-        yield return new WaitForSeconds(5);
-        liftTween.Rewind();
-
-    }*/
-
-
-
-
-    public void OpenLift()
-    {
-        //liftTween.Rewind();
-        foreach (var item in doors)
-        {
-            //sequenceLift.Append(item.transform.DOSmoothRewind());
-            //TODO: Open the left with rewind
-            Debug.Log("Rewinding");
-        }
     }
 
     public void CloseLift(string _sceneName)
