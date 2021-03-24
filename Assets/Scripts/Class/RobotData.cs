@@ -12,7 +12,7 @@ public class RobotData : ScriptableObject
     public GameObject robotGameObject;
     public float sideWaysMultiplier;
     public float forwardMultiplier;
-
+    public int connectedTeam { get; set; }
 
 
 }

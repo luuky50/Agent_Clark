@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : SingletonComponent<Laser>
+public class Laser : MonoBehaviour
 {
     public GameObject emitObject;
     public LineRenderer lr;

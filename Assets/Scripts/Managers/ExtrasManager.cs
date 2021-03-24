@@ -8,23 +8,24 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
 {
     public bool isPlaying = false;
     bool questionIsActive = false;
-    int timeUntillStartQuestionRound = 30;
+    int timeUntillStartQuestionRound = 15;
     float timer;
     public bool isMultipleChoice;
     public Text timeLeft;
 
     float timeLeftToAnswer = 20;
-
+    private void Start()
+    {
+        extraManagerInit();
+    }
     public void extraManagerInit()
     {
-
         isPlaying = true;
-        StartCoroutine(StartPlaying());
     }
 
-    IEnumerator StartPlaying()
+    void Update()
     {
-        while (isPlaying)
+        if (isPlaying)
         {
             timeLeftToAnswer -= Time.deltaTime;
             timer += Time.deltaTime;
@@ -34,7 +35,7 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
             if (timer > timeUntillStartQuestionRound)
             {
                 timer = 0;
-                timeLeftToAnswer = 20;
+                timeLeftToAnswer = 10;
                 _StartQuestionRound();
                 questionIsActive = true;
             }
@@ -43,8 +44,9 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
                 if (timeLeftToAnswer < 0.1f)
                 {
                     questionIsActive = false;
+
                     _EndQuestionRound();
-                    yield return null;
+          
                 }
             }
         }
@@ -60,19 +62,18 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
 
     private void _EndQuestionRound()
     {
-        QuestionroundManager.instance.EndQuestionRound();
+        Debug.Log("LASER GIVEN");
+        if (isMultipleChoice)
+           QuestionroundManager.instance.EndMPQuestionRound();
     }
 
-    public void GivePowerupToRobot()
+    public void ShootTheSwarm() {
+        SwarmManager.instance.ShootTheSwarm();
+    }
+
+    public void GiveLaserToRobot(GameObject robot)
     {
-        Debug.Log(isMultipleChoice);
-        if (isMultipleChoice)
-        {
-            SwarmManager.instance.ShootTheSwarm();
-        }
-        else
-        {
-            Laser.instance.Shoot();
-        }
+            robot.transform.GetChild(1).GetComponent<Laser>().Shoot();
+       
     }
 }

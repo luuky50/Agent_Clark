@@ -23,7 +23,6 @@ public class WeaponBehaviour : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(weaponData.weaponName);
 
         interactableHoverEvents = this.gameObject.GetComponent<InteractableHoverEvents>();
 

@@ -27,12 +27,14 @@ public class TeamManager : SingletonComponent<TeamManager>
     {
         try
         {
-            if (participant.team <= amountOfTeams)
+            if (checkForDoubleTeamSignUp(participant.ParticipantID) && participant.team < amountOfTeams)
             {
+
                 Participants.Add(new Participant(participant.ParticipantID, participant.team));
-            } else
+            }
+            else
             {
-                throw new Exception("given team index exceeds given max amount of teams!");
+                throw new Exception("Already joined a team!");
             }
         }
         catch (Exception e)
@@ -41,6 +43,17 @@ public class TeamManager : SingletonComponent<TeamManager>
         }
     }
 
+    bool checkForDoubleTeamSignUp(int participantID)
+    {
+        foreach (Participant p in TeamManager.instance.Participants)
+        {
+            if (p.ParticipantID == participantID)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     // TODO: for showcase purposes only
     void DebugAll()
     {

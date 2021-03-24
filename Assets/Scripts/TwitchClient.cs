@@ -21,18 +21,21 @@ public class TwitchClient : SingletonComponent<TwitchClient>
     //private bool isMainMenu = false;
 
     private Client _client;
-
-    public void StartTwitch(Text twitchName)
+    private void Start()
+    {
+        StartTwitch("luuky50");
+    }
+    public void StartTwitch(string twitchName)
     {
         // To keep the Unity application active in the background, you can enable "Run In Background" in the player settings:
         // Unity Editor --> Edit --> Project Settings --> Player --> Resolution and Presentation --> Resolution --> Run In Background
         // This option seems to be enabled by default in more recent versions of Unity. An aditional, less recommended option is to set it in code:
         // Application.runInBackground = true;
-        ChangeTwitchName(twitchName);
-        LevelManager.instance.LoadLevel("Tutorial", 0);
+    //    ChangeTwitchName(twitchName);
+       // LevelManager.instance.LoadLevel("Tutorial", 0);
         //robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
 
-        
+
 
 
         //Create Credentials instance
@@ -77,10 +80,10 @@ public class TwitchClient : SingletonComponent<TwitchClient>
 
     private void OnConnected(object sender, TwitchLib.Client.Events.OnConnectedArgs e)
     {
-        Debug.Log($"The bot {e.BotUsername} succesfully connected to Twitch.");
+     //   Debug.Log($"The bot {e.BotUsername} succesfully connected to Twitch.");
 
-        if (!string.IsNullOrWhiteSpace(e.AutoJoinChannel))
-            Debug.Log($"The bot will now attempt to automatically join the channel provided when the Initialize method was called: {e.AutoJoinChannel}");
+     //   if (!string.IsNullOrWhiteSpace(e.AutoJoinChannel))
+  //          Debug.Log($"The bot will now attempt to automatically join the channel provided when the Initialize method was called: {e.AutoJoinChannel}");
     }
     private void OnFailedToConnect(object sender, TwitchLib.Client.Events.OnConnectionErrorArgs e)
     {
@@ -89,7 +92,7 @@ public class TwitchClient : SingletonComponent<TwitchClient>
 
     private void OnJoinedChannel(object sender, TwitchLib.Client.Events.OnJoinedChannelArgs e)
     {
-        Debug.Log($"The bot {e.BotUsername} just joined the channel: {e.Channel}");
+       // Debug.Log($"The bot {e.BotUsername} just joined the channel: {e.Channel}");
         _client.SendMessage(e.Channel, "I just joined the channel! PogChamp");
     }
 
@@ -99,7 +102,7 @@ public class TwitchClient : SingletonComponent<TwitchClient>
         {
             if (e.ChatMessage.Message.Contains("answer"))
             {
-                QuestionroundManager.instance.ValidateClosedQuestion(e.ChatMessage.Message.Substring(8), int.Parse(e.ChatMessage.UserId));
+                QuestionroundManager.instance.QuestionAnswered(e.ChatMessage.Message.Substring(8), int.Parse(e.ChatMessage.UserId));
             }
             else if (e.ChatMessage.Message.Contains("join"))
             {
@@ -107,7 +110,7 @@ public class TwitchClient : SingletonComponent<TwitchClient>
                 {
                     Debug.Log(e.ChatMessage.UserId);
                     // TODO: Add index out of range check, for example when someone says "!join 9000000"
-                    TeamManager.instance.addParticipant(new Participant(int.Parse(e.ChatMessage.UserId), int.Parse(e.ChatMessage.Message.Substring(6)) -1));
+                    TeamManager.instance.addParticipant(new Participant(int.Parse(e.ChatMessage.UserId), int.Parse(e.ChatMessage.Message.Substring(6)) - 1));
                 }
                 catch (Exception ex)
                 {
@@ -115,33 +118,56 @@ public class TwitchClient : SingletonComponent<TwitchClient>
                     Debug.LogError("Could not join team!   " + ex);
                 }
             }
+
+
+            //TODO: Replace commented movement with robotmanager for multipile robots
+            if (e.ChatMessage.Message.Contains("right"))
+            {
+                foreach (Participant p in TeamManager.instance.Participants)
+                {
+                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    {
+                        robotManager.MoveRobot(p.team, SidewaysDirections.right);
+                    }
+                }
+            }
+            else if (e.ChatMessage.Message.Contains("left"))
+            {
+                foreach (Participant p in TeamManager.instance.Participants)
+                {
+                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    {
+                        robotManager.MoveRobot(p.team, SidewaysDirections.left);
+                    }
+                }
+            }
+            else if (e.ChatMessage.Message.Contains("up"))
+            {
+                foreach (Participant p in TeamManager.instance.Participants)
+                {
+                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    {
+                        robotManager.MoveRobot(p.team, SidewaysDirections.up);
+                    }
+                }
+            }
+            else if (e.ChatMessage.Message.Contains("down"))
+            {
+                foreach (Participant p in TeamManager.instance.Participants)
+                {
+                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    {
+                        robotManager.MoveRobot(p.team, SidewaysDirections.down);
+                    }
+                }
+            }
+
         }
     }
 
 
     private void OnChatCommandReceived(object sender, TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
     {
-        switch (e.Command.CommandText)
-        {
-            //TODO: Replace commented movement with robotmanager for multipile robots
-            case "right":
-                _client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot to the right");
-                //robotMovement.MoveSideways(SidewaysDirections.right);
-                break;
-            case "left":
-                _client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot to the left");
-                //robotMovement.MoveSideways(SidewaysDirections.left);
-                break;
-            case "up":
-                _client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot up");
-                //robotMovement.MoveSideways(SidewaysDirections.up);
-                break;
-            case "down":
-                _client.SendMessage(e.Command.ChatMessage.Channel, "You moved the twitch bot down");
-                //robotMovement.MoveSideways(SidewaysDirections.down);
-                break;
-            default:
-                break;
-        }
+
     }
 }

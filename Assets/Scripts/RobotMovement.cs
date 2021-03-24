@@ -14,13 +14,14 @@ public class RobotMovement : MonoBehaviour
 {
     private GameObject RobotModel;
     private Rigidbody RobotObject;
+    public bool canMove;
     private bool onWall;
     //NOTE: for testing only
     [SerializeField]
     private int sidewaysSpeedMultiplier = 10;
     //NOTE: for testing only
     [SerializeField]
-    private float forwardSpeedMultiplier = 0;
+    private float forwardSpeedMultiplier = 0.1f;
 
     private void Start()
     {
@@ -34,7 +35,8 @@ public class RobotMovement : MonoBehaviour
     }
     private void Update()
     {
-        MoveForward();
+        if (canMove)
+            MoveForward();
 
         // NOTE: for testing purposes only
         if (Input.GetKeyDown(KeyCode.A))
@@ -71,7 +73,8 @@ public class RobotMovement : MonoBehaviour
             this.transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
             DamageManager.instance.DamageToPlayer(20);
         }
-        else if (col.transform.CompareTag("End")) {
+        else if (col.transform.CompareTag("End"))
+        {
             transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
         }
     }

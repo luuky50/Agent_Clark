@@ -24,10 +24,12 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         new MultipleChoiceQuestion("What year is it?","2021","2022","2023","2024"),
 
     };
+    int bestTeam = 0;
 
 
+    List<float> teamScores = new List<float>() { {12 }, { 3 }, { 44 }, { 23 }, };
 
-    [SerializeField] Text[] teamOneStatusText;
+    [SerializeField] Text[] teamScoreText;
 
 
     private Dictionary<int, Dictionary<int, bool>> PlayerAnswersOfMultipleChoice = new Dictionary<int, Dictionary<int, bool>>();
@@ -42,9 +44,11 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     private void Start()
     {
         // TODO: initialize this only when we are in a scene where this is relevant
-  //      InitializeQuestionRoundUI();
+        //      InitializeQuestionRoundUI();
 
     }
+
+    
 
     public void InitializeQuestionRoundUI(bool isMultipleChoice)
 
@@ -78,15 +82,9 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         for (int i = 0; i < TeamManager.instance.amountOfTeams; i++)
         {
             PlayerAnswersOfMultipleChoice.Add(i, new Dictionary<int, bool>());
-            Debug.Log(PlayerAnswersOfMultipleChoice.Count);
         }
     }
 
-
-    private void Update()
-    {
-
-    }
 
     /// <summary>
     /// Handles initiation of a questionround. 
@@ -124,16 +122,37 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
             QuestionRoundPanel.GetComponentInChildren<Text>().text = currentQuestion.Key;
         }
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L)) { EndMPQuestionRound(); }
+    }
+    public void EndMPQuestionRound()
+    {
 
-    public void EndQuestionRound() {
         QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         QuestionRoundPanel.SetActive(false);
-        if (ExtrasManager.instance.isMultipleChoice)
-        {
-            ExtrasManager.instance.GivePowerupToRobot();
-        }
+
+    
+                ExtrasManager.instance.GiveLaserToRobot(RobotManager.instance.robots[bestTeam]);
+       
+
     }
 
+    public void EndOpenQuestionRound() {
+      
+            ExtrasManager.instance.ShootTheSwarm();
+        
+    }
+
+    public void QuestionAnswered(string message, int participantID) {
+        if (ExtrasManager.instance.isMultipleChoice)
+        {
+            ValidateClosedQuestion(message, participantID);
+        }
+        else {
+            ValidateOpenQuestion(message);
+        }
+    }
 
     /// <summary>
     /// validates question, checks if it is good and adds it to the givin answers list
@@ -183,6 +202,8 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         }
     }
 
+
+
     /// <summary>
     /// Validates if the given answer is correct
     /// </summary>
@@ -191,7 +212,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     {
         if (currentQuestion.Value == Answer)
         {
-            ExtrasManager.instance.GivePowerupToRobot();
+            EndOpenQuestionRound();
         }
         else
         {
@@ -199,10 +220,12 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         }
     }
 
-    
+
 
     private void setUIPanel()
     {
+        int prevTeamStatus = 0;
+  
         int Good = 0;
         int Wrong = 0;
         for (int i = 0; i < PlayerAnswersOfMultipleChoice.Count; i++)
@@ -228,7 +251,9 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
                 {
                     Status = 100;
                 }
-                teamOneStatusText[i].text = Status.ToString();
+             //   teamScoreText[i].text = Status.ToString();
+                teamScores[i] = Status;
+                if (Status > prevTeamStatus) { bestTeam = i; }
             }
         }
     }

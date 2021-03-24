@@ -11,7 +11,7 @@ public class LevelManager : SingletonComponent<LevelManager>
     public Scene currentScene;
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
+        
         SceneManager.sceneLoaded += OnLevelLoaded;
     }
 
@@ -26,8 +26,8 @@ public class LevelManager : SingletonComponent<LevelManager>
         ExtrasManager.instance.isPlaying = false;
 
 
-        Debug.Log("OnSceneLoaded: " + scene.name);
-        Debug.Log(mode);
+   
+
     }
     public void LoadLevel(string levelName, int waitTime)
     {
