@@ -25,8 +25,9 @@ public class RobotMovement : MonoBehaviour
 
     private void Start()
     {
-        RobotModel = gameObject.transform.GetChild(0).gameObject;
+        RobotModel = gameObject.transform.GetChild(3).gameObject;
         RobotObject = gameObject.transform.GetComponent<Rigidbody>();
+        //   transform.GetChild(3)?.GetComponent<Animator>()?.Play("anim_open_Walk_Loop", 1);
     }
 
     public void SetSpeed(float multiplier)
@@ -64,9 +65,15 @@ public class RobotMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
+        Debug.Log("COLLIDED WITH" + col.transform.name);
         onWall = col.gameObject.CompareTag("vertical") ? true : false;
-        RobotModel.transform.eulerAngles = col.gameObject.CompareTag("vertical"
-) ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);
+        //    RobotModel.transform.eulerAngles = col.gameObject.CompareTag("vertical"
+        //) ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);
+
+        if (col.transform.CompareTag("leftwall")) { RobotModel.transform.parent.eulerAngles = new Vector3(0f, 0f, -90f); onWall = true; }
+        else if (col.transform.CompareTag("rightwall")) { RobotModel.transform.parent.eulerAngles = new Vector3(0f, 0f, 90f); onWall = true; }
+        else if (col.transform.CompareTag("floor")) { RobotModel.transform.parent.eulerAngles = new Vector3(0f, 0f, 0f); onWall = false; } 
+        else if (col.transform.CompareTag("roof")) { RobotModel.transform.parent.eulerAngles = new Vector3(0f, 0f, 180f); onWall = false; }
 
         if (col.transform.CompareTag("PlayerHealth"))
         {

@@ -25,7 +25,7 @@ public class RobotManager : SingletonComponent<RobotManager>
         foreach (KeyValuePair<int, GameObject> kvp in robots)
         {
             RespawnRobot(kvp.Value);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(4);
         }
     }
 
