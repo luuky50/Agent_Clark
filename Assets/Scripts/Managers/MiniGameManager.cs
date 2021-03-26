@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MiniGameManager : MonoBehaviour
+public class MiniGameManager : SingletonComponent<MiniGameManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject miniGamesParent;
+
+    public List<GameObject> miniGames = new List<GameObject>();
+
+    private GameObject miniGamePreFab;
+
+    [SerializeField]
+    private GameObject newGame;
+
+
+    private void OnEnable()
     {
-        
+        StartMiniGame();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartMiniGame()
     {
+        miniGamePreFab = miniGames[Random.Range(0, miniGames.Count)];
         
+        newGame = Instantiate(miniGamePreFab, miniGamesParent.transform);
+
     }
+
+    public void EndMiniGame()
+    {
+        Debug.Log("End minigame");
+        Destroy(newGame);
+    }
+
 }

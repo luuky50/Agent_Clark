@@ -40,9 +40,6 @@ namespace Valve.VR.InteractionSystem
         [Tooltip( "When detaching the object, should it return to its original parent?" )]
 		public bool restoreOriginalParent = false;
 
-        [Tooltip("When picking up an object, can it shoot?")]
-        public bool canShoot = false;
-
 
         protected VelocityEstimator velocityEstimator;
         protected bool attached = false;
@@ -144,8 +141,6 @@ namespace Valve.VR.InteractionSystem
 
             attached = true;
 
-            canShoot = true;
-
 			onPickUp.Invoke();
 
 			hand.HoverLock( null );
@@ -166,8 +161,6 @@ namespace Valve.VR.InteractionSystem
         protected virtual void OnDetachedFromHand(Hand hand)
         {
             attached = false;
-
-            canShoot = false;
 
             onDetachFromHand.Invoke();
 

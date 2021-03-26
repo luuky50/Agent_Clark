@@ -21,6 +21,8 @@ public class WeaponBehaviour : MonoBehaviour
     [SerializeField]
     private WeaponData weaponData;
 
+    bool canShoot = false;
+
     private void Start()
     {
         Debug.Log(weaponData.weaponName);
@@ -29,10 +31,16 @@ public class WeaponBehaviour : MonoBehaviour
 
         interactableHoverEvents.onAttachedToHand.AddListener(() =>
         {
+            canShoot = true;
             if (LevelManager.instance.currentScene.name == "AI")
             {
                 ExtrasManager.instance.extraManagerInit();
             }
+        });
+
+        interactableHoverEvents.onDetachedFromHand.AddListener(() =>
+        {
+            canShoot = false;
         });
 
 
@@ -48,14 +56,11 @@ public class WeaponBehaviour : MonoBehaviour
         else
             Debug.LogError("CANNOT FIND A SPAWNPOINT");
 
-
-        throwable = gameObject;
-        throwableGun = throwable.GetComponent<Throwable>();
     }
 
     private void Update()
     {
-        if (throwableGun.canShoot && shoot.GetStateDown(inputSource))
+        if (canShoot && shoot.GetStateDown(inputSource))
         {
             StartCoroutine(Shoot());
         }

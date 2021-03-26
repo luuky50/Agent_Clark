@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class Cable : MonoBehaviour
 {
@@ -10,25 +11,37 @@ public class Cable : MonoBehaviour
     [SerializeField]
     GameObject cable;
 
-    // Start is called before the first frame update
+    Vector3 nozzleHandPosition;
+
+    //float offSet = 1.5f;
+
+    float distanceToFill;
+
+
     void Start()
     {
-
-
-
+        Throwable throweable = nozzle.GetComponent<Throwable>();
+        throweable.onHeldUpdate.AddListener((Hand hand) =>
+        {
+            Stretch();
+        });
+        throweable.onDetachFromHand.AddListener(() =>
+        {
+            Stretch();
+        });
     }
-
-    void Stretch()
+    public void Stretch()
     {
-        Vector3 nozzlePosition = nozzle.transform.position;
+        //Debug.Log("currentAttachtedObject:" + hand.currentAttachedObject.transform.localPosition);
+        //if (hand.currentAttachedObject != null)
+        //{
+        //TODO: When grabbing the object in VR extend the cable to the nozzle
+        nozzleHandPosition = nozzle.transform.localPosition;//hand.transform.localPosition;
 
-        //cable.transform.localScale()
+        distanceToFill = Vector3.Distance(nozzleHandPosition, cable.transform.localPosition);
+        //Debug.Log("Distance" + distanceToFill);
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Stretch();
+        cable.transform.localScale = new Vector3(distanceToFill, 1, 1);
+        //}
     }
 }
