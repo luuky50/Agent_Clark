@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RobotHealth : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class RobotHealth : MonoBehaviour
             health -= damage;
         else
             Death();
-
+        gameObject.transform.Find("teamIndicator").GetComponentInChildren<Slider>().value = health;
     }
 
     /// <summary>
