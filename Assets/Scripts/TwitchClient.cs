@@ -165,6 +165,51 @@ public class TwitchClient : SingletonComponent<TwitchClient>
                 }
             }
 
+
+
+            if (e.ChatMessage.Message.Contains("laser right"))
+            {
+                
+                    foreach (Participant p in TeamManager.instance.Participants)
+                    {
+                        if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                        {
+                            robotManager.robots[p.team].GetComponentInChildren<Laser>().laserDirection(SidewaysDirections.right);
+                        }
+                    }
+              
+            }
+            else if (e.ChatMessage.Message.Contains("laser left"))
+            {
+                foreach (Participant p in TeamManager.instance.Participants)
+                {
+                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    {
+                        robotManager.robots[p.team].GetComponentInChildren<Laser>().laserDirection(SidewaysDirections.left);
+                    }
+                }
+            }
+            else if (e.ChatMessage.Message.Contains("laser up"))
+            {
+                foreach (Participant p in TeamManager.instance.Participants)
+                {
+                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    {
+                        robotManager.robots[p.team].GetComponentInChildren<Laser>().laserDirection(SidewaysDirections.up);
+                    }
+                }
+            }
+            else if (e.ChatMessage.Message.Contains("laser down"))
+            {
+                foreach (Participant p in TeamManager.instance.Participants)
+                {
+                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    {
+                        robotManager.robots[p.team].GetComponentInChildren<Laser>().laserDirection(SidewaysDirections.down);
+                    }
+                }
+            }
+
         }
     }
 
