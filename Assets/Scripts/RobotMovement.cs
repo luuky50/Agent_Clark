@@ -79,10 +79,12 @@ public class RobotMovement : MonoBehaviour
         {
             this.transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
             DamageManager.instance.DamageToPlayer(20);
+            RobotManager.instance.RespawnRobot(gameObject);
         }
         else if (col.transform.CompareTag("End"))
         {
-            transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
+            RobotManager.instance.RespawnRobot(gameObject);
+
         }
     }
 

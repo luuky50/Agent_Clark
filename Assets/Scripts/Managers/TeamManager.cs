@@ -8,7 +8,7 @@ public class TeamManager : SingletonComponent<TeamManager>
     // keeps track of all the participants
     public List<Participant> Participants = new List<Participant>();
     // setting of how much teams there should be
-    public int amountOfTeams = 1;
+    public int amountOfTeams = 4;
 
     void Update()
     {

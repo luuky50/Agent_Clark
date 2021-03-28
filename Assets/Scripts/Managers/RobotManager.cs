@@ -7,21 +7,22 @@ using UnityEngine.UI;
 
 public class RobotManager : SingletonComponent<RobotManager>
 {
-   
-  public  Dictionary<int, GameObject> robots = new Dictionary<int, GameObject>();
+
+    public Dictionary<int, GameObject> robots = new Dictionary<int, GameObject>();
     [SerializeField]
     List<GameObject> spawnPoints = new List<GameObject>();
     public GameObject[] robotsInScene;
     // Start is called before the first frame update
     void Start()
     {
-        robotsInScene = GameObject.FindGameObjectsWithTag("Robot");
+        //robotsInScene = GameObject.FindGameObjectsWithTag("Robot");
         // spawnPoints = 
         ConnectRobotToATeam();
-    StartCoroutine(generateRobots());
+        //StartCoroutine(generateRobots());
     }
 
-    IEnumerator generateRobots() {
+    public IEnumerator generateRobots()
+    {
         foreach (KeyValuePair<int, GameObject> kvp in robots)
         {
             RespawnRobot(kvp.Value);
@@ -29,7 +30,8 @@ public class RobotManager : SingletonComponent<RobotManager>
         }
     }
 
-    public void MoveRobot(int participantID, SidewaysDirections dir) {
+    public void MoveRobot(int participantID, SidewaysDirections dir)
+    {
         robots[participantID].GetComponent<RobotMovement>().MoveSideways(dir);
     }
 
@@ -37,18 +39,19 @@ public class RobotManager : SingletonComponent<RobotManager>
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            RespawnRobot(robots[Random.Range(0,3)]);
+            RespawnRobot(robots[Random.Range(0, 3)]);
         }
     }
 
-    void RespawnRobot(GameObject gameObject)
+    public void RespawnRobot(GameObject gameObject)
     {
         gameObject.GetComponent<RobotMovement>().canMove = false;
-        int respawnPoint = Random.Range(0, 5);
+        int respawnPoint = Random.Range(0, 6);
         gameObject.transform.position = spawnPoints[respawnPoint].transform.position;
         gameObject.transform.DOMove(spawnPoints[respawnPoint].transform.GetChild(Random.Range(0, 2)).transform.position, 1).OnComplete(() =>
         {
             gameObject.GetComponent<RobotMovement>().canMove = true;
+            Debug.Log("Completed");
         });
     }
 

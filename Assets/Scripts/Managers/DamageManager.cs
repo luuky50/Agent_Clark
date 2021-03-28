@@ -15,10 +15,10 @@ public class DamageManager : SingletonComponent<DamageManager>
 
     void Start()
     {
-        foreach (GameObject item in GameObject.FindGameObjectsWithTag("Robot"))
-        {
-            robotHealths.Add(item.GetComponent<RobotHealth>());
-        }
+        //foreach (GameObject item in GameObject.FindGameObjectsWithTag("Robot"))
+        //{
+        //    robotHealths.Add(item.GetComponent<RobotHealth>());
+        //}
     }
 
     /// <summary>

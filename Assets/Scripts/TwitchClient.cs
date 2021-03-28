@@ -14,28 +14,25 @@ public class TwitchClient : SingletonComponent<TwitchClient>
     private string _channelToConnectTo = Secrets.USERNAME_FROM_OAUTH_TOKEN;
 
     //private RobotMovement robotMovement;
+    public RobotManager robotManager;
+
     [SerializeField]
-    private RobotManager robotManager;
+    private RobotMovement robotMovement;
 
     //[SerializeField]
     //private bool isMainMenu = false;
 
     private Client _client;
-    private void Start()
+    public void StartTwitch(Text twitchName)
     {
-        StartTwitch("luuky50");
-    }
-    public void StartTwitch(string twitchName)
-    {
+        LevelManager.instance.LoadLevel("Tutorial", 0);
         // To keep the Unity application active in the background, you can enable "Run In Background" in the player settings:
         // Unity Editor --> Edit --> Project Settings --> Player --> Resolution and Presentation --> Resolution --> Run In Background
         // This option seems to be enabled by default in more recent versions of Unity. An aditional, less recommended option is to set it in code:
         // Application.runInBackground = true;
-    //    ChangeTwitchName(twitchName);
-       // LevelManager.instance.LoadLevel("Tutorial", 0);
+         ChangeTwitchName(twitchName);
+        // LevelManager.instance.LoadLevel("Tutorial", 0);
         //robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
-
-
 
 
         //Create Credentials instance
@@ -123,12 +120,18 @@ public class TwitchClient : SingletonComponent<TwitchClient>
             //TODO: Replace commented movement with robotmanager for multipile robots
             if (e.ChatMessage.Message.Contains("right"))
             {
-                foreach (Participant p in TeamManager.instance.Participants)
+                if (LevelManager.instance.currentScene.name != "Tutorial")
                 {
-                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    foreach (Participant p in TeamManager.instance.Participants)
                     {
-                        robotManager.MoveRobot(p.team, SidewaysDirections.right);
+                        if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                        {
+                            robotManager.MoveRobot(p.team, SidewaysDirections.right);
+                        }
                     }
+                }
+                {
+                    //RobotMovement.
                 }
             }
             else if (e.ChatMessage.Message.Contains("left"))

@@ -18,10 +18,7 @@ public class SwarmManager : SingletonComponent<SwarmManager>
         DOTween.Init();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) { ShootTheSwarm(); }
-    }
+
 
     public void ShootTheSwarm()
     {
@@ -42,7 +39,7 @@ public class SwarmManager : SingletonComponent<SwarmManager>
         boom.gameObject.SetActive(true);
         swarm.transform.gameObject.SetActive(false);
         boom.Play();
-        DamageManager.instance.DamageToPlayer(50);
+        MiniGameManager.instance.StartMiniGame();
         //main.loop = false;
     }
 }

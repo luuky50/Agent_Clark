@@ -53,8 +53,8 @@ public class RobotHealth : MonoBehaviour
 
     private void Death()
     {
-        this.transform.position = new Vector3(-11.5f, 2.8f, -19.08f);
         health = 100;
+        RobotManager.instance.RespawnRobot(gameObject);
         deathCount++;
         if (deathCount == 4)
         {

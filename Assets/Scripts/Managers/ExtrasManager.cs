@@ -14,10 +14,6 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
     public Text timeLeft;
 
     float timeLeftToAnswer = 20;
-    private void Start()
-    {
-        extraManagerInit();
-    }
     public void extraManagerInit()
     {
         isPlaying = true;

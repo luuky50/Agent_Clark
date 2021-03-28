@@ -13,12 +13,6 @@ public class MiniGameManager : SingletonComponent<MiniGameManager>
     [SerializeField]
     private GameObject newGame;
 
-
-    private void OnEnable()
-    {
-        StartMiniGame();
-    }
-
     public void StartMiniGame()
     {
         miniGamePreFab = miniGames[Random.Range(0, miniGames.Count)];

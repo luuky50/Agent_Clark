@@ -27,7 +27,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     int bestTeam = 0;
 
 
-    List<float> teamScores = new List<float>() { {12 }, { 3 }, { 44 }, { 23 }, };
+    List<float> teamScores = new List<float>() { { 12 }, { 3 }, { 44 }, { 23 }, };
 
     [SerializeField] Text[] teamScoreText;
 
@@ -48,7 +48,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
 
     }
 
-    
+
 
     public void InitializeQuestionRoundUI(bool isMultipleChoice)
 
@@ -122,34 +122,31 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
             QuestionRoundPanel.GetComponentInChildren<Text>().text = currentQuestion.Key;
         }
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L)) { EndMPQuestionRound(); }
-    }
     public void EndMPQuestionRound()
     {
 
         QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         QuestionRoundPanel.SetActive(false);
 
-    
-                ExtrasManager.instance.GiveLaserToRobot(RobotManager.instance.robots[bestTeam]);
-       
+
+        ExtrasManager.instance.GiveLaserToRobot(RobotManager.instance.robots[bestTeam]);
+
 
     }
 
-    public void EndOpenQuestionRound() {
-      
-            ExtrasManager.instance.ShootTheSwarm();
-        
+    public void EndOpenQuestionRound()
+    {
+        ExtrasManager.instance.ShootTheSwarm();
     }
 
-    public void QuestionAnswered(string message, int participantID) {
+    public void QuestionAnswered(string message, int participantID)
+    {
         if (ExtrasManager.instance.isMultipleChoice)
         {
             ValidateClosedQuestion(message, participantID);
         }
-        else {
+        else
+        {
             ValidateOpenQuestion(message);
         }
     }
@@ -225,7 +222,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     private void setUIPanel()
     {
         int prevTeamStatus = 0;
-  
+
         int Good = 0;
         int Wrong = 0;
         for (int i = 0; i < PlayerAnswersOfMultipleChoice.Count; i++)
@@ -251,7 +248,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
                 {
                     Status = 100;
                 }
-             //   teamScoreText[i].text = Status.ToString();
+                //   teamScoreText[i].text = Status.ToString();
                 teamScores[i] = Status;
                 if (Status > prevTeamStatus) { bestTeam = i; }
             }

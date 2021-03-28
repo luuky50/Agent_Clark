@@ -22,6 +22,7 @@ public class LevelManager : SingletonComponent<LevelManager>
         if(currentScene.name == "AI")
         {
             DamageManager.instance.Init();
+            TwitchClient.instance.robotManager = GameObject.Find("Building").GetComponent<RobotManager>();
         }
         ExtrasManager.instance.isPlaying = false;
 

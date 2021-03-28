@@ -9,13 +9,13 @@ public class WeaponBehaviour : MonoBehaviour
     public SteamVR_Action_Boolean shoot = SteamVR_Input.GetAction<SteamVR_Action_Boolean>("ShootWeapon");
     private SteamVR_Input_Sources inputSource;
 
-    private InteractableHoverEvents interactableHoverEvents = null;
 
     public GameObject bullet;
-    public GameObject barrel;
     public float testSpeed = 4;
     private GameObject throwable;
+    [SerializeField]
     private GameObject spawnPoint;
+
     private Throwable throwableGun;
 
     [SerializeField]
@@ -26,18 +26,19 @@ public class WeaponBehaviour : MonoBehaviour
     private void Start()
     {
 
-        interactableHoverEvents = this.gameObject.GetComponent<InteractableHoverEvents>();
+        throwableGun = this.gameObject.GetComponent<Throwable>();
 
-        interactableHoverEvents.onAttachedToHand.AddListener(() =>
+        throwableGun.onPickUp.AddListener(() =>
         {
             canShoot = true;
             if (LevelManager.instance.currentScene.name == "AI")
             {
                 ExtrasManager.instance.extraManagerInit();
+                RobotManager.instance.StartCoroutine(RobotManager.instance.generateRobots());
             }
         });
 
-        interactableHoverEvents.onDetachedFromHand.AddListener(() =>
+        throwableGun.onDetachFromHand.AddListener(() =>
         {
             canShoot = false;
         });
@@ -50,10 +51,10 @@ public class WeaponBehaviour : MonoBehaviour
 
 
 
-        if (gameObject.transform.GetChild(2).name == "BulletSpawn")
-            spawnPoint = gameObject.transform.GetChild(2).gameObject;
-        else
+        if (spawnPoint == null)
+        {
             Debug.LogError("CANNOT FIND A SPAWNPOINT");
+        }
 
     }
 
