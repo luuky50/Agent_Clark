@@ -38,24 +38,6 @@ public class RobotMovement : MonoBehaviour
     {
         if (canMove)
             MoveForward();
-
-        // NOTE: for testing purposes only
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            MoveSideways(SidewaysDirections.left);
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            MoveSideways(SidewaysDirections.right);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            MoveSideways(SidewaysDirections.up);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            MoveSideways(SidewaysDirections.down);
-        }
     }
 
     private void MoveForward()
@@ -65,7 +47,7 @@ public class RobotMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        Debug.Log("COLLIDED WITH" + col.transform.name);
+
         onWall = col.gameObject.CompareTag("vertical") ? true : false;
         //    RobotModel.transform.eulerAngles = col.gameObject.CompareTag("vertical"
         //) ? new Vector3(0f, 0f, 90f) : new Vector3(0f, 0f, 0f);

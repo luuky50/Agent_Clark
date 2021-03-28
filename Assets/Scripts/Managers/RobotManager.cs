@@ -15,10 +15,8 @@ public class RobotManager : SingletonComponent<RobotManager>
     // Start is called before the first frame update
     void Start()
     {
-        //robotsInScene = GameObject.FindGameObjectsWithTag("Robot");
-        // spawnPoints = 
         ConnectRobotToATeam();
-        //StartCoroutine(generateRobots());
+      //  StartCoroutine(generateRobots());
     }
 
     public IEnumerator generateRobots()
@@ -51,7 +49,6 @@ public class RobotManager : SingletonComponent<RobotManager>
         gameObject.transform.DOMove(spawnPoints[respawnPoint].transform.GetChild(Random.Range(0, 2)).transform.position, 1).OnComplete(() =>
         {
             gameObject.GetComponent<RobotMovement>().canMove = true;
-            Debug.Log("Completed");
         });
     }
 
