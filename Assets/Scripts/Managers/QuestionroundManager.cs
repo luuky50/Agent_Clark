@@ -16,13 +16,29 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     [SerializeField]
     private Dictionary<string, string> OpenQuestions = new Dictionary<string, string>()
     {
-        {"What year is it?\n" +
-            "Example: !answer 2014", "2021"}
+        {"How many time zones are there in Russia?", "11"},
+         {"What’s the national flower of Japan?", "Cherry blossom"},
+  {"How many stripes are there on the US flag?", "13"},
+  {"What’s the national animal of Australia?", "Red Kangaroo"},
+  {"How many days does it take for the Earth to orbit the Sun?", "365"},
+  {"Which of the following empires had no written language: Incan, Aztec, Egyptian, Roman?", "Incan"},
+  {"Until 1923, what was the Turkish city of Istanbul called?", "Constantinople"},
+  {"What country has the most islands in the world?", "Sweden"},
+  {"What is the slang name for New York City, used by locals?", "Gotham"},
+  {"Which famous graffiti artist comes from Bristol?", "Banksy"},
+
     };
 
     private List<MultipleChoiceQuestion> multipleChoiceQuestions = new List<MultipleChoiceQuestion>() {
-        new MultipleChoiceQuestion("What year is it?","2021","2022","2023","2024"),
+        new MultipleChoiceQuestion("What is the longest that an elephant has ever lived?","86","17","49","142"),
+           new MultipleChoiceQuestion("How many rings are on the Olympic flag?","5","None","4","7"),
+           new MultipleChoiceQuestion(" How did Spider-Man get his powers?","Spider bit","Via Military","Woke up with","Born with"),
+           new MultipleChoiceQuestion(" In darts, what's the most points you can score with a single throw?","60","20","50","100"),
+           new MultipleChoiceQuestion(" Which of these animals does NOT appear in the Chinese zodiac?","Bear","Rabbit","Dragon","Dog"),
+           new MultipleChoiceQuestion(" How many holes are on a standard bowling ball?","3","2","5","10"),
 
+            new MultipleChoiceQuestion("What are the main colors on the flag of Spain?","Red and Yellow","Black-Yellow","Green-White","Blue-White"),
+           new MultipleChoiceQuestion(" Which of these countries was NOT a part of the Soviet Union?","Poland","Belarus","Georgia","Ukraine"),
     };
     int bestTeam = 0;
 
