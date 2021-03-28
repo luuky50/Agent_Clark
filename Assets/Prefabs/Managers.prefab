@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30b54591b4e83f41a919f2bc18d3e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amountOfTeams: 2
+  amountOfTeams: 4
 --- !u!1 &1102026700799950084
 GameObject:
   m_ObjectHideFlags: 0

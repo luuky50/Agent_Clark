@@ -40,6 +40,7 @@ public class RobotHealth : MonoBehaviour
             health -= damage;
         else
             Death();
+        Debug.Log(gameObject.transform.Find("teamIndicator").GetComponentInChildren<Slider>().value);
         gameObject.transform.Find("teamIndicator").GetComponentInChildren<Slider>().value = health;
     }
 

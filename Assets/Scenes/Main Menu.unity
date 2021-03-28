@@ -928,14 +928,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 78495711, guid: 0bdffbf14a0c41542b24eb026cbaef61, type: 3}
-      propertyPath: postLoadSettleTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78495712, guid: 0bdffbf14a0c41542b24eb026cbaef61, type: 3}
-      propertyPath: scenes.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1102026701824528769, guid: 0bdffbf14a0c41542b24eb026cbaef61, type: 3}
       propertyPath: m_RootOrder
       value: 4
