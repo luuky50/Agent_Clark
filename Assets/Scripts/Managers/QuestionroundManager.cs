@@ -19,7 +19,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         {"How many time zones are there in Russia?", "11"},
          {"What’s the national flower of Japan?", "Cherry blossom"},
   {"How many stripes are there on the US flag?", "13"},
-  {"What’s the national animal of Australia?", "Red Kangaroo"},
+  {"What’s the national animal of Australia?", "Kangaroo"},
   {"How many days does it take for the Earth to orbit the Sun?", "365"},
   {"Which of the following empires had no written language: Incan, Aztec, Egyptian, Roman?", "Incan"},
   {"Until 1923, what was the Turkish city of Istanbul called?", "Constantinople"},

@@ -46,7 +46,7 @@ public class Laser : MonoBehaviour
     }
 
 
-    void laserDirection(SidewaysDirections dir)
+    public void laserDirection(SidewaysDirections dir)
     {
         if (dir == SidewaysDirections.down)
         {
