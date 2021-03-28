@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
+using UnityEngine.SceneManagement;
 public class LevelManager : SingletonComponent<LevelManager>
 {
     //TODO: Make list of scenes
@@ -38,4 +39,11 @@ public class LevelManager : SingletonComponent<LevelManager>
         GetComponent<SteamVR_LoadLevel>().Trigger();
     }
 
+    public void LoadLevelWithoutVRIntergration(int level) {
+        SceneManager.LoadScene(0);
+    }
+    public void OnApplicationQuit()
+    {
+        Application.Quit();
+    }
 }
