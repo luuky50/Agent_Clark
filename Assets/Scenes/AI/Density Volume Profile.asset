@@ -376,7 +376,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 1
-    m_Value: 3.83
+    m_Value: 2.64
   contrast:
     m_OverrideState: 0
     m_Value: -11.5
@@ -418,7 +418,7 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 5.54
+    m_Value: 21.82
     min: 0
   scatter:
     m_OverrideState: 1
@@ -431,7 +431,7 @@ MonoBehaviour:
     min: 0
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.4448202, g: 0.7924528, b: 0.62615716, a: 1}
+    m_Value: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
