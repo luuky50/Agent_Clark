@@ -34,7 +34,7 @@ public class WeaponBehaviour : MonoBehaviour
             if (LevelManager.instance.currentScene.name == "AI")
             {
                 ExtrasManager.instance.extraManagerInit();
-                RobotManager.instance.StartCoroutine(RobotManager.instance.generateRobots());
+                RobotManager.instance.StartCoroutine(RobotManager.instance.generateRobots(4));
             }
         });
 
@@ -66,6 +66,14 @@ public class WeaponBehaviour : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.GetComponent<DropPoint>())
+        {
+            DropPoint newDropPoint = other.gameObject.GetComponent<DropPoint>();
+            newDropPoint.UnlockLift(gameObject);
+        }
+    }
 
 
     IEnumerator Shoot()

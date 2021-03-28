@@ -15,6 +15,7 @@ public class RobotMovement : MonoBehaviour
     private GameObject RobotModel;
     private Rigidbody RobotObject;
     public bool canMove;
+    public bool isEnd = false;
     private bool onWall;
     //NOTE: for testing only
     [SerializeField]
@@ -36,7 +37,7 @@ public class RobotMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (canMove)
+        if (canMove && !isEnd)
             MoveForward();
     }
 

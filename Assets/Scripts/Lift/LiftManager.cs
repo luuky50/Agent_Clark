@@ -11,6 +11,8 @@ public class LiftManager : SingletonComponent<LiftManager>
     private int secondsToWaitLift = 5;
     private bool isLiftClosed;
 
+    public GameObject upButton;
+
 
     List<Tween> liftTween = new List<Tween>();
 
@@ -59,7 +61,7 @@ public class LiftManager : SingletonComponent<LiftManager>
             item.transform.DOLocalMove(endPointLift.position, secondsToWaitLift);
         }
 
-        LevelManager.instance.LoadLevel(_sceneName, 5);
+        LevelManager.instance.LoadLevel(_sceneName, 5, true);
 
 
     }

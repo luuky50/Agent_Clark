@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     {
         Debug.Log("Got some damage: " + damage);
         if (health <= 0)
-            Death();
+            EndManager.instance.EndGame(false);
         else
             health -= damage;
 
@@ -37,11 +37,5 @@ public class PlayerHealth : MonoBehaviour
     public void OutgoingDamage(float damage)
     {
         DamageManager.instance.DamageToRobot(damage, 0);
-    }
-
-    private void Death()
-    {
-        Destroy(Player.instance.gameObject);
-        SceneManager.LoadScene(1);   
     }
 }

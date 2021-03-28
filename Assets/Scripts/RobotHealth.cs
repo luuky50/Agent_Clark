@@ -58,9 +58,9 @@ public class RobotHealth : MonoBehaviour
         health = 100;
         RobotManager.instance.RespawnRobot(gameObject);
         deathCount++;
-        if (deathCount == 4)
+        if (deathCount == 15)
         {
-            LevelManager.instance.LoadLevel("EndScene", 0);
+            EndManager.instance.EndGame(true);
         }
     }
 }

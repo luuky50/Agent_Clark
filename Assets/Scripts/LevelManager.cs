@@ -31,10 +31,11 @@ public class LevelManager : SingletonComponent<LevelManager>
    
 
     }
-    public void LoadLevel(string levelName, int waitTime)
+    public void LoadLevel(string levelName, int waitTime, bool loadAsync)
     {
         //using async load in inspector
         GetComponent<SteamVR_LoadLevel>().levelName = levelName;
+        GetComponent<SteamVR_LoadLevel>().loadAsync = loadAsync;
         GetComponent<SteamVR_LoadLevel>().postLoadTime = waitTime;
         GetComponent<SteamVR_LoadLevel>().Trigger();
     }

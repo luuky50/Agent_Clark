@@ -19,12 +19,12 @@ public class RobotManager : SingletonComponent<RobotManager>
       //  StartCoroutine(generateRobots());
     }
 
-    public IEnumerator generateRobots()
+    public IEnumerator generateRobots(int delay)
     {
         foreach (KeyValuePair<int, GameObject> kvp in robots)
         {
             RespawnRobot(kvp.Value);
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(delay);
         }
     }
 
