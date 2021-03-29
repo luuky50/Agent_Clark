@@ -13,6 +13,8 @@ public class RobotManager : SingletonComponent<RobotManager>
     List<GameObject> spawnPoints = new List<GameObject>();
     public GameObject[] robotsInScene;
     // Start is called before the first frame update
+    public int lives = 4;
+
     void Start()
     {
         ConnectRobotToATeam();
@@ -46,10 +48,13 @@ public class RobotManager : SingletonComponent<RobotManager>
         gameObject.GetComponent<RobotMovement>().canMove = false;
         int respawnPoint = Random.Range(0, 6);
         gameObject.transform.position = spawnPoints[respawnPoint].transform.position;
-        gameObject.transform.DOMove(spawnPoints[respawnPoint].transform.GetChild(Random.Range(0, 2)).transform.position, 1).OnComplete(() =>
+        if (!gameObject.GetComponent<RobotMovement>().isEnd)
         {
-            gameObject.GetComponent<RobotMovement>().canMove = true;
-        });
+            gameObject.transform.DOMove(spawnPoints[respawnPoint].transform.GetChild(Random.Range(0, 2)).transform.position, 1).OnComplete(() =>
+            {
+                gameObject.GetComponent<RobotMovement>().canMove = true;
+            });
+        }
     }
 
     void ConnectRobotToATeam()

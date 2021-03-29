@@ -8,11 +8,13 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
 {
     public bool isPlaying = false;
     bool questionIsActive = false;
+    [SerializeField]
     int timeUntillStartQuestionRound = 15;
     float timer;
     public bool isMultipleChoice;
     public Text timeLeft;
 
+    [SerializeField]
     float timeLeftToAnswer = 20;
     public void extraManagerInit()
     {
@@ -31,7 +33,7 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
             if (timer > timeUntillStartQuestionRound)
             {
                 timer = 0;
-                timeLeftToAnswer = 10;
+                timeLeftToAnswer = 15;
                 _StartQuestionRound();
                 questionIsActive = true;
             }

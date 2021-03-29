@@ -19,13 +19,14 @@ public class TwitchClient : SingletonComponent<TwitchClient>
     [SerializeField]
     private RobotMovement robotMovement;
 
+
     //[SerializeField]
     //private bool isMainMenu = false;
 
     private Client _client;
     public void StartTwitch(Text twitchName)
     {
-        LevelManager.instance.LoadLevel("Tutorial", 0);
+        LevelManager.instance.LoadLevel("Tutorial", 0, true);
         // To keep the Unity application active in the background, you can enable "Run In Background" in the player settings:
         // Unity Editor --> Edit --> Project Settings --> Player --> Resolution and Presentation --> Resolution --> Run In Background
         // This option seems to be enabled by default in more recent versions of Unity. An aditional, less recommended option is to set it in code:

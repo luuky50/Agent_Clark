@@ -23,14 +23,11 @@ public class LevelManager : SingletonComponent<LevelManager>
         if(currentScene.name == "AI")
         {
             DamageManager.instance.Init();
+            MiniGameManager.instance.Init();
             TwitchClient.instance.robotManager = GameObject.Find("Building").GetComponent<RobotManager>();
         }
         ExtrasManager.instance.isPlaying = false;
-
-
-   
-
-    }
+        }
     public void LoadLevel(string levelName, int waitTime, bool loadAsync)
     {
         //using async load in inspector
@@ -39,11 +36,10 @@ public class LevelManager : SingletonComponent<LevelManager>
         GetComponent<SteamVR_LoadLevel>().postLoadTime = waitTime;
         GetComponent<SteamVR_LoadLevel>().Trigger();
     }
-
     public void LoadLevelWithoutVRIntergration(int level) {
         SceneManager.LoadScene(0);
     }
-    public void OnApplicationQuit()
+    public void QuitApplication()
     {
         Application.Quit();
     }

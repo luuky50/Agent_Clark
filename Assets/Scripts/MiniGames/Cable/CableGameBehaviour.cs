@@ -18,8 +18,12 @@ public class CableGameBehaviour : MonoBehaviour
 
     public int completedCables = 0;
 
+    private MeshRenderer effectObject;
+
     private void OnEnable()
     {
+        effectObject = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(3).GetComponentInChildren<MeshRenderer>();
+        effectObject.enabled = true;
         SetEndColors();
     }
 
@@ -50,6 +54,7 @@ public class CableGameBehaviour : MonoBehaviour
     {
         //TODO: Turn EFFECT on
         yield return new WaitForSeconds(secondsToDestroy);
+        effectObject.enabled = false;
         MiniGameManager.instance.EndMiniGame();
     }
 

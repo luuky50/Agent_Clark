@@ -13,8 +13,13 @@ public class MiniGameManager : SingletonComponent<MiniGameManager>
     [SerializeField]
     private GameObject newGame;
 
+    public void Init()
+    {
+        miniGamesParent = GameObject.Find("MiniGames");
+    }
     public void StartMiniGame()
     {
+
         miniGamePreFab = miniGames[Random.Range(0, miniGames.Count)];
         
         newGame = Instantiate(miniGamePreFab, miniGamesParent.transform);

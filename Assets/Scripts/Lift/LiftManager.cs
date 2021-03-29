@@ -56,12 +56,21 @@ public class LiftManager : SingletonComponent<LiftManager>
     {
         //Sequence sequenceLift = DOTween.Sequence();
         print(_sceneName);
+        liftTween.Clear();
         foreach (var item in doors)
         {
-            item.transform.DOLocalMove(endPointLift.position, secondsToWaitLift);
+            Vector3 loc = endPointLift.position;
+            var tween = item.transform.DOLocalMove(loc, secondsToWaitLift);
+            liftTween.Add(tween);
+            Sequence s = DOTween.Sequence();
+            s.Append(tween);
+            s.OnComplete(() => { LevelManager.instance.LoadLevel(_sceneName, 0, true); });
+            s.Play();
+
+            //item.transform.DOLocalMove(endPointLift.position, secondsToWaitLift);
         }
 
-        LevelManager.instance.LoadLevel(_sceneName, 5, true);
+        //LevelManager.instance.LoadLevel(_sceneName, 5, true);
 
 
     }

@@ -10,6 +10,7 @@ public class RobotHealth : MonoBehaviour
     private float health;
     private float damage;
 
+    [SerializeField]
     private int deathCount;
     
     // information about current health and damage it can deal to others
@@ -56,11 +57,19 @@ public class RobotHealth : MonoBehaviour
     private void Death()
     {
         health = 100;
-        RobotManager.instance.RespawnRobot(gameObject);
         deathCount++;
-        if (deathCount == 15)
+        if (deathCount == 5)
         {
-            EndManager.instance.EndGame(true);
+            RobotManager.instance.lives--;
+            gameObject.SetActive(false);
+            if(RobotManager.instance.lives == 0)
+            {
+                EndManager.instance.EndGame(true);
+            }
+        }
+        else
+        {
+            RobotManager.instance.RespawnRobot(gameObject);
         }
     }
 }

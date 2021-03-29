@@ -1976,5 +1976,5 @@ MonoBehaviour:
   - {fileID: 7631697572410100530}
   - {fileID: 7631697571400040730}
   - {fileID: 7631697572428911088}
-  secondsToDestroy: 5
+  secondsToDestroy: 3
   completedCables: 0
