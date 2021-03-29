@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,8 +12,8 @@ public class RobotHealth : MonoBehaviour
     private float damage;
 
     [SerializeField]
-    private int deathCount;
-    
+    private int currentLives;
+
     // information about current health and damage it can deal to others
     public RobotHealth(float newHealth, float newDamage)
     {
@@ -41,6 +42,13 @@ public class RobotHealth : MonoBehaviour
             health -= damage;
         else
             Death();
+        var robotTeam = from entry in RobotManager.instance.robots where entry.Value == gameObject select entry.Key;
+        int _robotTeam = 0;
+        foreach (var item in robotTeam)
+        {
+            _robotTeam = item;
+        }
+        LevelCanvasHandler.instance.SetTeamHealth(_robotTeam, health);
         Debug.Log(gameObject.transform.Find("teamIndicator").GetComponentInChildren<Slider>().value);
         gameObject.transform.Find("teamIndicator").GetComponentInChildren<Slider>().value = health;
     }
@@ -57,8 +65,16 @@ public class RobotHealth : MonoBehaviour
     private void Death()
     {
         health = 100;
-        deathCount++;
-        if (deathCount == 5)
+        var robotTeam = from entry in RobotManager.instance.robots where entry.Value == gameObject select entry.Key;
+        int _robotTeam = 0;
+        foreach (var item in robotTeam)
+        {
+            _robotTeam = item;
+        }
+
+        currentLives--;
+        LevelCanvasHandler.instance.SetTeamRespawns(_robotTeam, currentLives);
+        if (currentLives == 0)
         {
             RobotManager.instance.lives--;
             gameObject.SetActive(false);

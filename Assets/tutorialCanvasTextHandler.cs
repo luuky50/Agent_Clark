@@ -5,32 +5,31 @@ using UnityEngine.UI;
 
 public class tutorialCanvasTextHandler : MonoBehaviour
 {
-    public List<Participant> ParticipantsCopy = new List<Participant>();
+    public List<Participant> ParticipantsCopy;
     [SerializeField]
     Text[] amountOfPeopleInTeamTexts;
     [SerializeField]
     int[] amountOfPeopleInTeamCount;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ParticipantsCopy != TeamManager.instance.Participants)
+        for (int i = 0; i < amountOfPeopleInTeamCount.Length; i++)
         {
-            ParticipantsCopy = TeamManager.instance.Participants;
-            foreach(Participant p in ParticipantsCopy)
-            {
-                amountOfPeopleInTeamCount[p.team]++; 
-            }
-            for (int i = 0; i < amountOfPeopleInTeamTexts.Length; i++)
-            {
-                amountOfPeopleInTeamTexts[i].text = amountOfPeopleInTeamCount[i].ToString();
-            }
+            amountOfPeopleInTeamCount[i] = 0;
+        }
+
+        foreach (Participant p in TeamManager.instance.Participants)
+        {
+            amountOfPeopleInTeamCount[p.team]++;
+        }
+        for (int i = 0; i < amountOfPeopleInTeamTexts.Length; i++)
+        {
+            amountOfPeopleInTeamTexts[i].text = "People in Team " + (i +1) + ":  " + amountOfPeopleInTeamCount[i].ToString();
         }
     }
-
-    
 }

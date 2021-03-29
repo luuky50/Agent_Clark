@@ -31,7 +31,7 @@ public class TwitchClient : SingletonComponent<TwitchClient>
         // Unity Editor --> Edit --> Project Settings --> Player --> Resolution and Presentation --> Resolution --> Run In Background
         // This option seems to be enabled by default in more recent versions of Unity. An aditional, less recommended option is to set it in code:
         // Application.runInBackground = true;
-         ChangeTwitchName(twitchName);
+        ChangeTwitchName(twitchName);
         // LevelManager.instance.LoadLevel("Tutorial", 0);
         //robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
 
@@ -78,10 +78,10 @@ public class TwitchClient : SingletonComponent<TwitchClient>
 
     private void OnConnected(object sender, TwitchLib.Client.Events.OnConnectedArgs e)
     {
-     //   Debug.Log($"The bot {e.BotUsername} succesfully connected to Twitch.");
+        //   Debug.Log($"The bot {e.BotUsername} succesfully connected to Twitch.");
 
-     //   if (!string.IsNullOrWhiteSpace(e.AutoJoinChannel))
-  //          Debug.Log($"The bot will now attempt to automatically join the channel provided when the Initialize method was called: {e.AutoJoinChannel}");
+        //   if (!string.IsNullOrWhiteSpace(e.AutoJoinChannel))
+        //          Debug.Log($"The bot will now attempt to automatically join the channel provided when the Initialize method was called: {e.AutoJoinChannel}");
     }
     private void OnFailedToConnect(object sender, TwitchLib.Client.Events.OnConnectionErrorArgs e)
     {
@@ -90,7 +90,7 @@ public class TwitchClient : SingletonComponent<TwitchClient>
 
     private void OnJoinedChannel(object sender, TwitchLib.Client.Events.OnJoinedChannelArgs e)
     {
-       // Debug.Log($"The bot {e.BotUsername} just joined the channel: {e.Channel}");
+        // Debug.Log($"The bot {e.BotUsername} just joined the channel: {e.Channel}");
         _client.SendMessage(e.Channel, "I just joined the channel! PogChamp");
     }
 
@@ -131,38 +131,60 @@ public class TwitchClient : SingletonComponent<TwitchClient>
                         }
                     }
                 }
+                else
                 {
-                    //RobotMovement.
+                    robotManager.MoveRobotSingle(SidewaysDirections.right);
                 }
             }
             else if (e.ChatMessage.Message.Contains("left"))
             {
-                foreach (Participant p in TeamManager.instance.Participants)
+                if (LevelManager.instance.currentScene.name != "Tutorial")
                 {
-                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    foreach (Participant p in TeamManager.instance.Participants)
                     {
-                        robotManager.MoveRobot(p.team, SidewaysDirections.left);
+                        if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                        {
+                            robotManager.MoveRobot(p.team, SidewaysDirections.left);
+                        }
                     }
+                }
+                else
+                {
+                    robotManager.MoveRobotSingle(SidewaysDirections.left);
                 }
             }
             else if (e.ChatMessage.Message.Contains("up"))
             {
-                foreach (Participant p in TeamManager.instance.Participants)
+                if (LevelManager.instance.currentScene.name != "Tutorial")
                 {
-                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    foreach (Participant p in TeamManager.instance.Participants)
                     {
-                        robotManager.MoveRobot(p.team, SidewaysDirections.up);
+                        if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                        {
+                            robotManager.MoveRobot(p.team, SidewaysDirections.up);
+                        }
                     }
+                }
+                else
+                {
+                    robotManager.MoveRobotSingle(SidewaysDirections.up);
                 }
             }
             else if (e.ChatMessage.Message.Contains("down"))
             {
-                foreach (Participant p in TeamManager.instance.Participants)
+                if (LevelManager.instance.currentScene.name != "Tutorial")
                 {
-                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                    foreach (Participant p in TeamManager.instance.Participants)
                     {
-                        robotManager.MoveRobot(p.team, SidewaysDirections.down);
+                        if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
+                        {
+                            robotManager.MoveRobot(p.team, SidewaysDirections.down);
+                        }
                     }
+                }
+                else
+                {
+                    robotManager.MoveRobotSingle(SidewaysDirections.down);
                 }
             }
 
@@ -170,15 +192,15 @@ public class TwitchClient : SingletonComponent<TwitchClient>
 
             if (e.ChatMessage.Message.Contains("laser right"))
             {
-                
-                    foreach (Participant p in TeamManager.instance.Participants)
+
+                foreach (Participant p in TeamManager.instance.Participants)
+                {
+                    if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
                     {
-                        if (p.ParticipantID == int.Parse(e.ChatMessage.UserId))
-                        {
-                            robotManager.robots[p.team].GetComponentInChildren<Laser>().laserDirection(SidewaysDirections.right);
-                        }
+                        robotManager.robots[p.team].GetComponentInChildren<Laser>().laserDirection(SidewaysDirections.right);
                     }
-              
+                }
+
             }
             else if (e.ChatMessage.Message.Contains("laser left"))
             {

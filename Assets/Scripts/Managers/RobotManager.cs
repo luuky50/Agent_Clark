@@ -12,12 +12,16 @@ public class RobotManager : SingletonComponent<RobotManager>
     [SerializeField]
     List<GameObject> spawnPoints = new List<GameObject>();
     public GameObject[] robotsInScene;
+    public GameObject tutorialBot;
     // Start is called before the first frame update
     public int lives = 4;
 
     void Start()
     {
-        ConnectRobotToATeam();
+        if (LevelManager.instance.currentScene.name == "AI")
+        {
+            ConnectRobotToATeam();
+        }
       //  StartCoroutine(generateRobots());
     }
 
@@ -33,6 +37,11 @@ public class RobotManager : SingletonComponent<RobotManager>
     public void MoveRobot(int participantID, SidewaysDirections dir)
     {
         robots[participantID].GetComponent<RobotMovement>().MoveSideways(dir);
+    }
+
+    public void MoveRobotSingle( SidewaysDirections dir)
+    {
+        tutorialBot.GetComponent<RobotMovement>().MoveSideways(dir);
     }
 
     private void Update()

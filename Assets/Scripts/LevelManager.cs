@@ -26,6 +26,10 @@ public class LevelManager : SingletonComponent<LevelManager>
             MiniGameManager.instance.Init();
             TwitchClient.instance.robotManager = GameObject.Find("Building").GetComponent<RobotManager>();
         }
+        if(currentScene.name == "Tutorial")
+        {
+            TwitchClient.instance.robotManager = GameObject.Find("Building").GetComponent<RobotManager>();
+        }
         ExtrasManager.instance.isPlaying = false;
         }
     public void LoadLevel(string levelName, int waitTime, bool loadAsync)
