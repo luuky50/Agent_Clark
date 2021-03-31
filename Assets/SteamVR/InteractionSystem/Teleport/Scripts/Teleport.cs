@@ -875,6 +875,7 @@ namespace Valve.VR.InteractionSystem
 					teleportPoint.TeleportToScene();
 					return;
 				}
+				teleportPoint.onTeleport.Invoke();
 			}
 
 			// Find the actual floor position below the navigation mesh
