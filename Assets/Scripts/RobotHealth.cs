@@ -42,13 +42,8 @@ public class RobotHealth : MonoBehaviour
             health -= damage;
         else
             Death();
-        var robotTeam = from entry in RobotManager.instance.robots where entry.Value == gameObject select entry.Key;
-        int _robotTeam = 0;
-        foreach (var item in robotTeam)
-        {
-            _robotTeam = item;
-        }
-        LevelCanvasHandler.instance.SetTeamHealth(_robotTeam, health);
+       
+        LevelCanvasHandler.instance.SetTeamHealth(utils.instance.getTeam(gameObject), health);
         Debug.Log(gameObject.transform.Find("teamIndicator").GetComponentInChildren<Slider>().value);
         gameObject.transform.Find("teamIndicator").GetComponentInChildren<Slider>().value = health;
     }
@@ -65,15 +60,10 @@ public class RobotHealth : MonoBehaviour
     private void Death()
     {
         health = 100;
-        var robotTeam = from entry in RobotManager.instance.robots where entry.Value == gameObject select entry.Key;
-        int _robotTeam = 0;
-        foreach (var item in robotTeam)
-        {
-            _robotTeam = item;
-        }
+       
 
         currentLives--;
-        LevelCanvasHandler.instance.SetTeamRespawns(_robotTeam, currentLives);
+        LevelCanvasHandler.instance.SetTeamRespawns(utils.instance.getTeam(gameObject), currentLives);
         if (currentLives == 0)
         {
             RobotManager.instance.lives--;

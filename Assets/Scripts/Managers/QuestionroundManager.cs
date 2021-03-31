@@ -42,9 +42,6 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     };
     int bestTeam = 0;
 
-
-    List<float> teamScores = new List<float>() { { 12 }, { 3 }, { 44 }, { 23 }, };
-
     [SerializeField] Text[] teamScoreText;
 
 
@@ -57,20 +54,8 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     private KeyValuePair<string, string> currentQuestion;
     private int correctAnswer;
 
-    private void Start()
-    {
-        // TODO: initialize this only when we are in a scene where this is relevant
-        //      InitializeQuestionRoundUI();
-
-    }
-
-
-
     public void InitializeQuestionRoundUI(bool isMultipleChoice)
-
-
     {
-
         if (isMultipleChoice)
         {
             QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
@@ -138,17 +123,20 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
             QuestionRoundPanel.GetComponentInChildren<Text>().text = currentQuestion.Key;
         }
     }
+
+
     public void EndMPQuestionRound()
     {
 
         QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         QuestionRoundPanel.SetActive(false);
 
-
+        LevelCanvasHandler.instance.SetRightQuestionText(currentMultipleChoiceQuestion.Answer, "Team " + bestTeam + " got the best score");
         ExtrasManager.instance.GiveLaserToRobot(RobotManager.instance.robots[bestTeam]);
 
 
     }
+
 
     public void EndOpenQuestionRound()
     {
@@ -163,7 +151,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         }
         else
         {
-            ValidateOpenQuestion(message);
+            ValidateOpenQuestion(message,  participantID);
         }
     }
 
@@ -221,11 +209,12 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     /// Validates if the given answer is correct
     /// </summary>
     /// <param name="Answer"></param>
-    public void ValidateOpenQuestion(string Answer)
+    public void ValidateOpenQuestion(string Answer, int participantID)
     {
         if (currentQuestion.Value == Answer)
         {
             EndOpenQuestionRound();
+            LevelCanvasHandler.instance.SetRightQuestionText(Answer, "Player: " +  utils.instance.getTeam(participantID).ToString() + "got it right");
         }
         else
         {
@@ -265,7 +254,6 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
                     Status = 100;
                 }
                 //   teamScoreText[i].text = Status.ToString();
-                teamScores[i] = Status;
                 if (Status > prevTeamStatus) { bestTeam = i; }
             }
         }

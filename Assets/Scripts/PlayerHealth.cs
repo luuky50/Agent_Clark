@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Valve.VR.InteractionSystem;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
             EndManager.instance.EndGame(false);
         else
             health -= damage;
-
+        LevelCanvasHandler.instance.SetVRPlayerHealth(health);
     }
 
     /// <summary>
