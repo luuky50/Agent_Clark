@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
-public class VideoController : MonoBehaviour
+public class MusicManager : MonoBehaviour
 {
     [SerializeField]
-    List<AudioClip> tutorialClips = new List<AudioClip>();
-
-    GameObject currentVideoPlayer;
+    AudioMixerGroup audioMixerGroup;
+    [SerializeField]
+    List<AudioClip> audioClips = new List<AudioClip>();
 
     // Start is called before the first frame update
-    void Start()
+    void PlayAudio()
     {
         
     }
 
+
+    public void PlayNextAudio()
+    {
+
+    }
     // Update is called once per frame
     void Update()
     {
