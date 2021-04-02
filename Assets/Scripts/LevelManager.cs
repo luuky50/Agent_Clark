@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
-using UnityEngine.SceneManagement;
 public class LevelManager : SingletonComponent<LevelManager>
 {
     //TODO: Make list of scenes
@@ -24,9 +23,8 @@ public class LevelManager : SingletonComponent<LevelManager>
         {
             DamageManager.instance.Init();
             MiniGameManager.instance.Init();
-            TwitchClient.instance.robotManager = GameObject.Find("Building").GetComponent<RobotManager>();
         }
-        if(currentScene.name == "Tutorial")
+        if(currentScene.name == "Tutorial" || currentScene.name == "AI")
         {
             TwitchClient.instance.robotManager = GameObject.Find("Building").GetComponent<RobotManager>();
         }
