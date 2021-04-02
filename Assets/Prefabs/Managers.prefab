@@ -322,9 +322,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea4f9c5f66dcb0439545c847f38926e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixerGroup: {fileID: 24300002, guid: 1ece9dfec5caf9a4db99a0133fa893ed, type: 2}
+  audioMixer: {fileID: 24100000, guid: 1ece9dfec5caf9a4db99a0133fa893ed, type: 2}
   audioClips:
   - {fileID: 8300000, guid: 12df32d962f232945920e038b9b69792, type: 3}
+  - {fileID: 8300000, guid: 7baf5e2bd35beb14c90ad1fec0a0a881, type: 3}
 --- !u!82 &2558127393864239817
 AudioSource:
   m_ObjectHideFlags: 0

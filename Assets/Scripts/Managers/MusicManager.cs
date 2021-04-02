@@ -6,21 +6,32 @@ using UnityEngine.Audio;
 public class MusicManager : MonoBehaviour
 {
     [SerializeField]
-    AudioMixerGroup audioMixerGroup;
+    AudioMixer audioMixer;
     [SerializeField]
     List<AudioClip> audioClips = new List<AudioClip>();
 
-    // Start is called before the first frame update
-    void PlayAudio()
+    private void Start()
     {
-        
+        PlayAudio(audioClips[0]);
+    }
+    public void PlayAudio(AudioClip audioClip)
+    {
+        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
-
-    public void PlayNextAudio()
+    void StopAudio()
     {
-
+        //TODO: Stop audio
     }
+
+    IEnumerator StopAudioSmooth() 
+    {
+        //TODO: Stop audio smoothly
+        yield return null;
+    }
+
     // Update is called once per frame
     void Update()
     {

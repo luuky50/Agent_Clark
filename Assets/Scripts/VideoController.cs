@@ -13,11 +13,8 @@ public class VideoController : MonoBehaviour
         {
             currentVideoPlayer.GetComponent<VideoPlayer>().Stop();
         }
-        else
-        {
-            currentVideoPlayer = currentVideo;
-            currentVideo.GetComponent<VideoPlayer>().Play();
-        }
+        currentVideoPlayer = currentVideo;
+        currentVideo.GetComponent<VideoPlayer>().Play();
 
     }
 
