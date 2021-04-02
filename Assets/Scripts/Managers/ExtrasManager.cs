@@ -12,7 +12,6 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
     int timeUntillStartQuestionRound = 15;
     float timer;
     public bool isMultipleChoice;
-    public Text timeLeft;
 
     [SerializeField]
     float timeLeftToAnswer = 20;
@@ -28,10 +27,10 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
             timeLeftToAnswer -= Time.deltaTime;
             timer += Time.deltaTime;
 
-            timeLeft.text = ((int)timeLeftToAnswer).ToString();
 
             if (timer > timeUntillStartQuestionRound)
             {
+                LevelCanvasHandler.instance.SetTimeLeftText(((int)timeLeftToAnswer).ToString());
                 timer = 0;
                 timeLeftToAnswer = 15;
                 _StartQuestionRound();
@@ -44,7 +43,6 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
                     questionIsActive = false;
 
                     _EndQuestionRound();
-          
                 }
             }
         }
@@ -71,7 +69,6 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
 
     public void GiveLaserToRobot(GameObject robot)
     {
-            robot.transform.GetChild(1).GetComponent<Laser>().Shoot();
-       
+            robot.transform.GetChild(1).GetComponent<Laser>().Shoot();    
     }
 }
