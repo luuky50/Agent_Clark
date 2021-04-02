@@ -43,6 +43,7 @@ public class Laser : MonoBehaviour
     {
         lr.SetPosition(1, new Vector3(0, 0, 50));
         timer = 0;
+        this.GetComponent<RobotMovement>().canMove = false;
     }
 
 
@@ -71,7 +72,7 @@ public class Laser : MonoBehaviour
     void EndShoot()
     {
         RaycastHit hit;
-
+        this.GetComponent<RobotMovement>().canMove = true;
         if (Physics.Raycast(emitObject.transform.position, emitObject.transform.forward, out hit))
         {
             ///TODO: damage to health of Streamer
