@@ -214,7 +214,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         if (currentQuestion.Value == Answer)
         {
             EndOpenQuestionRound();
-            LevelCanvasHandler.instance.SetRightQuestionText(Answer, "Player: " +  utils.instance.getTeam(participantID).ToString() + "got it right");
+            LevelCanvasHandler.instance.SetRightQuestionText(Answer, "Player: " +  utils.getTeam(participantID).ToString() + "got it right");
         }
         else
         {

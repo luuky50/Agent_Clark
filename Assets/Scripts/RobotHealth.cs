@@ -43,7 +43,7 @@ public class RobotHealth : MonoBehaviour
         else
             Death();
        
-        LevelCanvasHandler.instance.SetTeamHealth(utils.instance.getTeam(gameObject), health);
+        LevelCanvasHandler.instance.SetTeamHealth(utils.getTeam(gameObject), health);
         Debug.Log(gameObject.transform.Find("teamIndicator").GetComponentInChildren<Slider>().value);
         gameObject.transform.Find("teamIndicator").GetComponentInChildren<Slider>().value = health;
     }
@@ -63,7 +63,7 @@ public class RobotHealth : MonoBehaviour
        
 
         currentLives--;
-        LevelCanvasHandler.instance.SetTeamRespawns(utils.instance.getTeam(gameObject), currentLives);
+        LevelCanvasHandler.instance.SetTeamRespawns(utils.getTeam(gameObject), currentLives);
         if (currentLives == 0)
         {
             RobotManager.instance.lives--;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class  utils : SingletonComponent<utils>
+public static class utils
 {
-    public int getTeam(GameObject gameObject)
+    public static int getTeam(GameObject gameObject)
     {
         var robotTeam = from entry in RobotManager.instance.robots where entry.Value == gameObject select entry.Key;
         int _robotTeam = 0;
@@ -16,7 +16,7 @@ public class  utils : SingletonComponent<utils>
         return _robotTeam;
     }
 
-    public int getTeam(int particitpantID)
+    public static int getTeam(int particitpantID)
     {
         int index = 0;
         foreach(Participant p in TeamManager.instance.Participants)
