@@ -12,7 +12,7 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
-        PlayAudio(audioClips[0]);
+        //PlayAudio(audioClips[0]);
     }
     public void PlayAudio(AudioClip audioClip)
     {
