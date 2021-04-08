@@ -16,10 +16,9 @@ public class ButtonManager : MonoBehaviour
         TwitchClient.instance.StartTwitch(twitchName);
     }
 
-    public void SwitchToScene()
+    public void SwitchToScene(string _scene)
     {
-        Destroy(Player.instance.gameObject);
-        LevelManager.instance.LoadLevel("Tutorial", 0, true);
+        LevelManager.instance.LoadLevel(_scene, 0, true);
     }
 
     public void SwitchToSceneTemp()

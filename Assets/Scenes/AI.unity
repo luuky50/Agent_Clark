@@ -1889,6 +1889,7 @@ GameObject:
   - component: {fileID: 227270261}
   - component: {fileID: 227270260}
   - component: {fileID: 227270263}
+  - component: {fileID: 227270264}
   m_Layer: 0
   m_Name: Core
   m_TagString: Untagged
@@ -2106,6 +2107,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5b69c27e19659744beb2e1a3b6c2194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &227270264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227270255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7418c7dd8f977d4e969202d3fa7e926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseEditorExpanded: 1
+  blendEditorExpanded: 0
+  poseNames:
+  - sphereSmallPose (MAIN)
+  overridePreviewLeftHandPrefab: {fileID: 1000013348574242, guid: 638779290bce1af49b356f33dcc6fccf, type: 3}
+  overridePreviewRightHandPrefab: {fileID: 1000010304998954, guid: 6def53d002137b747aec0b29551e0e25, type: 3}
+  skeletonMainPose: {fileID: 11400000, guid: ccd16738d1f943640aa2aed1071a3897, type: 2}
+  skeletonAdditionalPoses: []
+  showLeftPreview: 0
+  showRightPreview: 0
+  previewLeftInstance: {fileID: 0}
+  previewRightInstance: {fileID: 0}
+  previewPoseSelection: 0
+  blendingBehaviours: []
+  scale: 1
 --- !u!1 &250097069
 GameObject:
   m_ObjectHideFlags: 0
@@ -2502,6 +2530,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 63217690063337462, guid: 570af428c08d4b746b5cd2ab3f454d6e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.033203125
+      objectReference: {fileID: 0}
     - target: {fileID: 63217690107574064, guid: 570af428c08d4b746b5cd2ab3f454d6e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.34300002
@@ -2524,7 +2556,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 63217690107574064, guid: 570af428c08d4b746b5cd2ab3f454d6e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.017807
+      value: 2.0178223
+      objectReference: {fileID: 0}
+    - target: {fileID: 63217690123542022, guid: 570af428c08d4b746b5cd2ab3f454d6e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.20800781
       objectReference: {fileID: 0}
     - target: {fileID: 229458553071948468, guid: 570af428c08d4b746b5cd2ab3f454d6e, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2586,6 +2622,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: 7c46d01b0982daa48af380faf088dc17, type: 3}
+    - target: {fileID: 3651044924825088870, guid: 570af428c08d4b746b5cd2ab3f454d6e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.4657593
+      objectReference: {fileID: 0}
     - target: {fileID: 4154082029555924958, guid: 570af428c08d4b746b5cd2ab3f454d6e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
