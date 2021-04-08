@@ -81,6 +81,7 @@ public class WeaponBehaviour : MonoBehaviour
         GameObject newBullet = Instantiate(bullet, spawnPoint.transform.position, transform.rotation);
         Rigidbody bulletRigid = newBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = transform.forward * testSpeed;
+        GetComponent<AudioSource>().Play();
 
 
         yield return new WaitForSeconds(8f);
