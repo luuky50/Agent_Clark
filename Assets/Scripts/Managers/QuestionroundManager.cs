@@ -63,6 +63,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
             QuestionRoundPanel.transform.GetChild(0).gameObject.SetActive(true);
             QuestionRoundPanel.transform.GetChild(1).gameObject.SetActive(false);
             QuestionRoundPanel.transform.GetChild(2).gameObject.SetActive(true);
+            QuestionRoundPanel.transform.parent.GetChild(5).gameObject.SetActive(true);
             BeginQuestionRound(isMultipleChoice);
         }
         else
@@ -73,7 +74,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
             QuestionRoundPanel.transform.GetChild(1).gameObject.SetActive(true);
             QuestionRoundPanel.transform.GetChild(2).gameObject.SetActive(false);
             BeginQuestionRound(isMultipleChoice);
-
+            QuestionRoundPanel.transform.parent.transform.GetChild(5).gameObject.SetActive(true);
         }
     }
 

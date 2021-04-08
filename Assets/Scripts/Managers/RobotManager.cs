@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.UI;
 
+enum teamColors
+{
+    red,
+    yellow,
+    blue,
+    green
+}
 public class RobotManager : SingletonComponent<RobotManager>
 {
 
@@ -22,7 +29,7 @@ public class RobotManager : SingletonComponent<RobotManager>
         {
             ConnectRobotToATeam();
         }
-      //  StartCoroutine(generateRobots());
+        StartCoroutine(generateRobots(4));
     }
 
     public IEnumerator generateRobots(int delay)
@@ -88,8 +95,30 @@ public class RobotManager : SingletonComponent<RobotManager>
         {
             robots[i] = robotsInScene[indexesAlreadyGiven[i]];
             robots[i].transform.GetChild(2).GetComponent<Canvas>().worldCamera = Camera.main;
-            robots[i].transform.GetChild(2).GetComponentInChildren<Text>().text = "The robot of team: " + (i + 1);
+            robots[i].transform.GetChild(2).GetComponentInChildren<Text>().text = "The robot of team: " + (teamColors)i;
+      
+            robots[i].transform.GetChild(2).GetComponentInChildren<Text>().color = getColor(i);
         }
 
     }
+
+    Color getColor(int color) {
+    if (color == 0)
+        {
+            return Color.red;
+        }
+        else if (color == 1)
+        {
+            return Color.yellow;
+        }
+        else if (color == 2)
+        {
+            return Color.blue;
+        }
+        else
+        {
+            return Color.green;
+        }
+    }
+
 }

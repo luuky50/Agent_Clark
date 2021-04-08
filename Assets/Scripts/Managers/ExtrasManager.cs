@@ -19,7 +19,10 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
     {
         isPlaying = true;
     }
-
+    private void Start()
+    {
+        extraManagerInit();
+    }
     void Update()
     {
         if (isPlaying)
@@ -30,14 +33,14 @@ public class ExtrasManager : SingletonComponent<ExtrasManager>
 
             if (timer > timeUntillStartQuestionRound)
             {
-                LevelCanvasHandler.instance.SetTimeLeftText(((int)timeLeftToAnswer).ToString());
                 timer = 0;
                 timeLeftToAnswer = 15;
                 _StartQuestionRound();
                 questionIsActive = true;
             }
             if (questionIsActive)
-            {
+            {               
+                LevelCanvasHandler.instance.SetTimeLeftText(((int)timeLeftToAnswer).ToString());
                 if (timeLeftToAnswer < 0.1f)
                 {
                     questionIsActive = false;

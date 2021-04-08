@@ -37,12 +37,14 @@ public class RobotMovement : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(canMove);
         if (canMove && !isEnd)
             MoveForward();
     }
 
     private void MoveForward()
     {
+
         RobotObject.transform.position = new Vector3(RobotObject.transform.position.x, RobotObject.transform.position.y, RobotObject.transform.position.z + forwardSpeedMultiplier);
     }
 
@@ -67,7 +69,6 @@ public class RobotMovement : MonoBehaviour
         else if (col.transform.CompareTag("End"))
         {
             RobotManager.instance.RespawnRobot(gameObject);
-
         }
     }
 

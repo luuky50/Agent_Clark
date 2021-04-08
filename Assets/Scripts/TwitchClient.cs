@@ -24,15 +24,15 @@ public class TwitchClient : SingletonComponent<TwitchClient>
     //private bool isMainMenu = false;
 
     private Client _client;
-    public void StartTwitch(Text twitchName)
+    public void Start()
     {
         //LevelManager.instance.LoadLevel("Tutorial", 0, true);
-        SceneManager.LoadSceneAsync("Tutorial");
+    //    SceneManager.LoadSceneAsync("Tutorial");
         // To keep the Unity application active in the background, you can enable "Run In Background" in the player settings:
         // Unity Editor --> Edit --> Project Settings --> Player --> Resolution and Presentation --> Resolution --> Run In Background
         // This option seems to be enabled by default in more recent versions of Unity. An aditional, less recommended option is to set it in code:
         // Application.runInBackground = true;
-        ChangeTwitchName(twitchName);
+       // ChangeTwitchName(twitchName);
         // LevelManager.instance.LoadLevel("Tutorial", 0);
         //robotMovement = GameObject.Find("Robot").gameObject.GetComponent<RobotMovement>();
 
@@ -109,7 +109,21 @@ public class TwitchClient : SingletonComponent<TwitchClient>
                 {
                     Debug.Log(e.ChatMessage.UserId);
                     // TODO: Add index out of range check, for example when someone says "!join 9000000"
-                    TeamManager.instance.addParticipant(new Participant(int.Parse(e.ChatMessage.UserId), int.Parse(e.ChatMessage.Message.Substring(6)) - 1));
+                    if ((e.ChatMessage.Message.Contains("red"))){
+                        TeamManager.instance.addParticipant(new Participant(int.Parse(e.ChatMessage.UserId), 0));
+                    }
+                    else if ((e.ChatMessage.Message.Contains("yellow")))
+                    {
+                        TeamManager.instance.addParticipant(new Participant(int.Parse(e.ChatMessage.UserId), 1));
+                    }
+                    else if ((e.ChatMessage.Message.Contains("blue")))
+                    {
+                        TeamManager.instance.addParticipant(new Participant(int.Parse(e.ChatMessage.UserId), 2));
+                    }
+                    else if ((e.ChatMessage.Message.Contains("green")))
+                    {
+                        TeamManager.instance.addParticipant(new Participant(int.Parse(e.ChatMessage.UserId), 3));
+                    }
                 }
                 catch (Exception ex)
                 {
