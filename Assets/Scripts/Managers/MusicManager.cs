@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class MusicManager : MonoBehaviour
+public class MusicManager : SingletonComponent<MusicManager>
 {
     [SerializeField]
     AudioMixer audioMixer;
-    [SerializeField]
-    List<AudioClip> audioClips = new List<AudioClip>();
+    public List<AudioClip> audioClips = new List<AudioClip>();
 
     private void Start()
     {
-        //PlayAudio(audioClips[0]);
+        PlayAudio(audioClips[0]);
     }
     public void PlayAudio(AudioClip audioClip)
     {

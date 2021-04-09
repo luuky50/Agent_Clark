@@ -8,7 +8,7 @@ public class Laser : MonoBehaviour
     public LineRenderer lr;
 
     float timer = 0;
-    int timeToAim = 5;
+    int timeToAim = 15;
 
     private void Start()
     {

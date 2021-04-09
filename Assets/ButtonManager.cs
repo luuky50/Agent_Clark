@@ -18,13 +18,7 @@ public class ButtonManager : MonoBehaviour
 
     public void SwitchToScene(string _scene)
     {
-        LevelManager.instance.LoadLevel(_scene, 0, true);
-    }
-
-    public void SwitchToSceneTemp()
-    {
-        Destroy(Player.instance.gameObject);
-        SceneManager.LoadScene(1);
+        LevelManager.instance.LoadLevel(_scene, 0, true, false);
     }
 
     public void ExitButton()

@@ -64,7 +64,7 @@ public class LiftManager : SingletonComponent<LiftManager>
             liftTween.Add(tween);
             Sequence s = DOTween.Sequence();
             s.Append(tween);
-            s.OnComplete(() => { LevelManager.instance.LoadLevel(_sceneName, 0, true); });
+            s.OnComplete(() => { LevelManager.instance.LoadLevel(_sceneName, 0, true, false); });
             s.Play();
 
             //item.transform.DOLocalMove(endPointLift.position, secondsToWaitLift);

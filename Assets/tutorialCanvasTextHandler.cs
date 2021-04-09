@@ -29,7 +29,7 @@ public class tutorialCanvasTextHandler : MonoBehaviour
         }
         for (int i = 0; i < amountOfPeopleInTeamTexts.Length; i++)
         {
-            amountOfPeopleInTeamTexts[i].text = "People in Team " + (i +1) + ":  " + amountOfPeopleInTeamCount[i].ToString();
+            amountOfPeopleInTeamTexts[i].text = "People in Team " + ((teamColors)i) + ":  " + amountOfPeopleInTeamCount[i].ToString();
         }
     }
 }

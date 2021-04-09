@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.UI;
 
-enum teamColors
+public enum teamColors
 {
     red,
     yellow,
@@ -29,7 +29,7 @@ public class RobotManager : SingletonComponent<RobotManager>
         {
             ConnectRobotToATeam();
         }
-        StartCoroutine(generateRobots(4));
+        //StartCoroutine(generateRobots(4));
     }
 
     public IEnumerator generateRobots(int delay)

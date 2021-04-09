@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
     {
         Debug.Log("Enemy has been hit");
         print("currentRobot: " + enemyRobot.name);
-        DamageManager.instance.DamageToRobot(15, enemyRobot.GetComponentInParent<RobotHealth>());
+        DamageManager.instance.DamageToRobot(10, enemyRobot.GetComponentInParent<RobotHealth>());
     }
 
 

@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void addPlayer();
 public class TeamManager : SingletonComponent<TeamManager>
 {
     // keeps track of all the participants
     public List<Participant> Participants = new List<Participant>();
     // setting of how much teams there should be
     public int amountOfTeams = 4;
+
+    public event addPlayer completed;
 
     void Update()
     {
@@ -29,8 +32,8 @@ public class TeamManager : SingletonComponent<TeamManager>
         {
             if (checkForDoubleTeamSignUp(participant.ParticipantID) && participant.team < amountOfTeams)
             {
-
-                Participants.Add(new Participant(participant.ParticipantID, participant.team));
+                Participants.Add(new Participant(participant.ParticipantID, participant.team, participant.userName));
+                completed?.Invoke();
             }
             else
             {
@@ -39,13 +42,13 @@ public class TeamManager : SingletonComponent<TeamManager>
         }
         catch (Exception e)
         {
-            Debug.LogError("Could not add participant!  " + e);
+            Debug.LogWarning("Could not add participant!  " + e);
         }
     }
 
     bool checkForDoubleTeamSignUp(int participantID)
     {
-        foreach (Participant p in TeamManager.instance.Participants)
+        foreach (Participant p in Participants)
         {
             if (p.ParticipantID == participantID)
             {
@@ -59,7 +62,7 @@ public class TeamManager : SingletonComponent<TeamManager>
     {
         foreach (var item in Participants)
         {
-            Debug.Log(item.team + "  " + item.ParticipantID); 
+            Debug.Log(item.team + "  " + item.ParticipantID);
         }
     }
 }
@@ -71,9 +74,11 @@ public class Participant
 {
     public int ParticipantID;
     public int team;
-    public Participant(int newParticipantID, int newTeam)
+    public string userName;
+    public Participant(int newParticipantID, int newTeam, string newUserName)
     {
         ParticipantID = newParticipantID;
         team = newTeam;
+        userName = newUserName;
     }
 }

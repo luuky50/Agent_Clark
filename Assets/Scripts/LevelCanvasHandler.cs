@@ -38,7 +38,7 @@ public class LevelCanvasHandler : SingletonComponent<LevelCanvasHandler>
 
     public void SetTeamRespawns(int team, int respawns)
     {
-        teamRespawnsText[team].text = "Respawns" + respawns.ToString();
+        teamRespawnsText[team].text = "Respawns: " + respawns.ToString();
     }
 
     public void SetRightQuestionText(string theQuestion, string theTeam)

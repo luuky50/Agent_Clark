@@ -109,14 +109,26 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
                 {currentMultipleChoiceQuestion.WrongAnswerTwo },
                 {currentMultipleChoiceQuestion.WrongAnswerThree }
             };
+            List<int> indexesAlreadyGiven = new List<int>();
+            bool complete = false;
+            int randomIndex = 0;
             for (int i = 0; i < answers.Length; i++)
             {
+                complete = false;
                 if (goodQuestionPosition != i)
                 {
-                    answers[i].text = wrongAnswers[Random.Range(0, 3)];
+                    while (!complete)
+                    {
+                        randomIndex = Random.Range(0, 3);
+                        if (!indexesAlreadyGiven.Contains(randomIndex))
+                        {
+                            complete = true;
+                            indexesAlreadyGiven.Add(randomIndex);
+                        }
+                    }
+                    answers[i].text = wrongAnswers[randomIndex];
                 }
             }
-
         }
         else
         {
@@ -132,7 +144,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         QuestionRoundPanel = GameObject.Find("Canvas").transform.GetChild(0).gameObject;
         QuestionRoundPanel.SetActive(false);
 
-        LevelCanvasHandler.instance.SetRightQuestionText(currentMultipleChoiceQuestion.Answer, "Team " + bestTeam + " got the best score");
+        LevelCanvasHandler.instance.SetRightQuestionText(currentMultipleChoiceQuestion.Answer, "Team " + (teamColors)bestTeam + " got the best score");
         ExtrasManager.instance.GiveLaserToRobot(RobotManager.instance.robots[bestTeam]);
 
 
@@ -144,7 +156,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         ExtrasManager.instance.ShootTheSwarm();
     }
 
-    public void QuestionAnswered(string message, int participantID)
+    public void QuestionAnswered(string message, int participantID, string userName)
     {
         if (ExtrasManager.instance.isMultipleChoice)
         {
@@ -152,7 +164,7 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
         }
         else
         {
-            ValidateOpenQuestion(message,  participantID);
+            ValidateOpenQuestion(message, participantID, userName);
         }
     }
 
@@ -210,12 +222,12 @@ public class QuestionroundManager : SingletonComponent<QuestionroundManager>
     /// Validates if the given answer is correct
     /// </summary>
     /// <param name="Answer"></param>
-    public void ValidateOpenQuestion(string Answer, int participantID)
+    public void ValidateOpenQuestion(string Answer, int participantID, string userName)
     {
         if (currentQuestion.Value == Answer)
         {
             EndOpenQuestionRound();
-            LevelCanvasHandler.instance.SetRightQuestionText(Answer, "Player: " +  utils.getTeam(participantID).ToString() + "got it right");
+            LevelCanvasHandler.instance.SetRightQuestionText(Answer, "Player: " + userName + " got it right");
         }
         else
         {

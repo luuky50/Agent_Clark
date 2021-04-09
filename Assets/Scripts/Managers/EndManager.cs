@@ -31,7 +31,7 @@ public class EndManager : SingletonComponent<EndManager>
         else
         {
             //Destroy(Player.instance.gameObject);
-            LevelManager.instance.LoadLevel("EndScene", 0, true);
+            LevelManager.instance.LoadLevel("EndScene", 0, true, false);
 
         }
     }
